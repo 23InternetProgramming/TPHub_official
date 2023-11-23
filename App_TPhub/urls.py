@@ -10,5 +10,5 @@ urlpatterns = [
     path('board/', include('board.urls')),
     path('member/', include('member.urls')),
     path('etc/', include('etc.urls')),
-    path('self_profile/', include('self_profile.urls')),
+    path('myprofile/', include('myprofile.urls')),
 ]
