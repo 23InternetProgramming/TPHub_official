@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-light text-black" style="background-color: #FFFEF8; border-bottom: 1px solid #ddd;">
+    <div class="container">
+        <!-- 로고와 세 개의 메뉴를 감싸는 부분 -->
+        <div class="d-flex align-items-center justify-content-between w-100">
+            <a class="navbar-brand" href="/">TPHub</a>
+
+            <!-- 메뉴들을 감싸는 div -->
+            <div class="d-flex">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 50px;" href="/schedule">일정</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 50px;" href="/board">게시판</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 50px;" href="/member">멤버</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 50px;" href="/etc">Etc</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 우측 로그인 모달 -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Log In</a> <!-- boot5에 적용해야한다 함 data-bs-머기시 이거 2개 -->
+                </li>
+            </ul>
+
+            <!--&lt;!&ndash; 우측에 드롭다운으로 표시될 메뉴 &ndash;&gt;
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Log In
+                    </a>
+                    &lt;!&ndash; 드롭다운 메뉴 항목들 &ndash;&gt;
+                    <div class="dropdown-menu" aria-labelledby="loginDropdown">
+                        <a class="dropdown-item" href="#">워크스페이스1</a>
+                        <a class="dropdown-item" href="#">워크스페이스2</a>
+                        <a class="dropdown-item" href="#">워크스페이스3</a>
+                    </div>
+                </li>
+            </ul>-->
+        </div>
+    </div>
+</nav>
