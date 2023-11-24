@@ -41,36 +41,36 @@
         </div>
     </div>
 
-    <div class="container my-3">
-        <div class="row">
-            <div class="col-md-3">
-                <!-- 좌측 박스 -->
-                <div class="card my-4">
-                    <h5 class="card-header">콘텐츠 1</h5>
-                    <div class="card-body">
-                    </div>
-                </div>
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-2 offset-md-0" id="left-area">
+            <!-- 좌측 박스 -->
+            <div class="card my-4 mx-0">
+                {% block left_area %}
+                {% endblock %}
             </div>
+        </div>
 
-            <div class="col-md-6" id="main-area">
-                <div class="card my-4">
-                    <div class="card-body">
-                        {% block main_area %}
-                        {% endblock %}
-                    </div>
+        <div class="col-md-7" id="main-area">
+
+                <!-- 메인 박스 -->
+                <div class="card-body" style="min-height: 700px;">
+                    {% block main_area %}
+                    {% endblock %}
                 </div>
-            </div>
 
-            <div class="col-md-3">
-                <!-- 우측 박스 -->
-                <div class="card my-4">
-                    <h5 class="card-header">콘텐츠 3</h5>
-                    <div class="card-body">
-                    </div>
+        </div>
+
+        <div class="col-md-2" id="right-area">
+            <!-- 우측 박스 -->
+            <div class="card my-4 mx-0">
+                <h5>여기에 프로필</h5>
+                <div class="card-body">
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Footer -->
     {% include 'landing_page/footer.html' %}
