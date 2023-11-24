@@ -13,3 +13,5 @@ urlpatterns = [
     path('self_profile/', include('self_profile.urls')),
     path('account/', include('account.urls')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
