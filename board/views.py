@@ -1,8 +1,19 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Category
 from django.core.exceptions import PermissionDenied
+
+class PostDelete(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = '/board/'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:
+            return super(PostDelete, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
