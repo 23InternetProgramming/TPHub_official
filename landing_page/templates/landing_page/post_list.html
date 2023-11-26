@@ -1,37 +1,40 @@
 {% extends 'landing_page/base.html' %}
 
+{% block left_area %}
+    <h7>전체일정</h7>
+{% endblock %}
+
+
 {% block main_area %}
-    <h3>[아이디어]</h3>
-
-    {% if post_list.exists %}
-        {% for p in post_list %}
-            <!-- Blog Post -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">{{ p.title }}</h2>
-                    <p class="card-text">{{ p.content | truncatewords:10 }}</p>
-                    <a href="#" class="btn btn-primary">Read More &rarr;</a>
-                </div>
-                <div class="card-footer text-muted">
-                    Posted on {{ p.created_at }}
-                    <a href="#">개발예정</a>
-                </div>
+    <!-- 패들렛 임베디드 HTML 코드 !-->
+    <div class="padlet">
+        <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1); border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4">
+            <p style="padding:0;margin:0">
+                <iframe src="https://padlet.com/embed/5cjk43zd6dw6sjbd"
+                        frameborder="0"
+                        allow="camera;microphone;geolocation"
+                        style="width:800px;min-height:900px;display:block;padding:0;margin:0">
+                </iframe>
+            </p>
+            <div style="display:flex;align-items:center;justify-content:end;margin:0;height:28px">
+                <a href="https://padlet.com?ref=embed"
+                   style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none"
+                   target="_blank">
+                    <div style="display:flex;align-items:center;">
+                        <img src="https://padlet.net/embeds/made_with_padlet_2022.png"
+                             width="114" height="28"
+                             style="padding:0;margin:0;background:0 0;border:none;box-shadow:none"
+                             alt="Padlet으로 만듦">
+                    </div>
+                </a>
             </div>
-        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
 
-    {% else %}
-            <h3>아직 게시물이 없습니다.</h3>
 
-    {% endif %}
 
-            <!-- Pagination -->
-            <!--<ul class="pagination justify-content-center mb-4">
-                <li class="page-item">
-                    <a class="page-link" href="#">&larr; Older</a>
-                </li>
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">Newer &rarr;</a>
-                </li>
-            </ul>-->
+{% block right_area %}
+
 {% endblock %}
 

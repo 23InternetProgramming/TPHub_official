@@ -1,9 +1,6 @@
-<!-- category_list.html -->
+{% extends 'board/base.html' %} {% load static %}
 
-{% extends "board/base.html" %}
-{% load static %}
-
-{% block content %}
+{% block main_area %}
   <!-- 상단 부분 -->
   <header>
     <!-- base.html의 상단 내용 추가 -->
@@ -72,5 +69,5 @@
 {% endblock %}
 
 
-<!--2023/11/23/12:10am : 카테고리 링크 연결이 안되어서 웹사이트 실물을 확인해볼 수 없음.
-링크 연결해보려고 했으나 30분째 실패함. 시간 아까우니 넘어가도록하자..-->
+
+<!--        <img src="{% static 'board/images/like_lucky.jpeg' %}" alt="">-->
