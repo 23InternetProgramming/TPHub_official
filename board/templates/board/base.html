@@ -9,6 +9,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+
     <!-- NavBar -->
     {% include 'landing_page/navbar.html' %}
 
@@ -41,36 +42,25 @@
         </div>
     </div>
 
-    <div class="container my-3">
-        <div class="row">
-            <div class="col-md-3">
-                <!-- 좌측 박스 -->
-                <div class="card my-4">
-                    <h5 class="card-header">콘텐츠 1</h5>
-                    <div class="card-body">
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-6" id="main-area">
-                <div class="card my-4">
+    <div class="container-fluid my-3">
+        <div class="row">
+            <div class="col-md-6 mx-auto" id="main-area">
                     <div class="card-body">
+                         <div class="row mb-2">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-outline-dark mr-2">전체 게시물</button>
+                                <button type="button" class="btn btn-outline-dark">카테고리</button>
+                            </div>
+                        </div>
+                        <hr>
                         {% block main_area %}
                         {% endblock %}
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <!-- 우측 박스 -->
-                <div class="card my-4">
-                    <h5 class="card-header">콘텐츠 3</h5>
-                    <div class="card-body">
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+
 
     <!-- Footer -->
     {% include 'landing_page/footer.html' %}
