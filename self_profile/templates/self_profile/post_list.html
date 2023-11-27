@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> main
-
 {% extends 'self_profile/base.html' %}
 
 
 
-<<<<<<< HEAD
-=======
+
 
 {% block main_area %}
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -16,7 +10,6 @@
 
 <div class="self_profile">
     <div class="row well">
-
         <div class="col-md-15">
             <div class="panel" style="height: 250px;">
                 <img class="rounded-circle border border-0 border-white shadow"
@@ -46,29 +39,29 @@
 
                 <!-- edit form column -->
                 <div class="col-md-9 personal-info">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" id="profileForm" onsubmit="return showSaveConfirmation()">
                         <div class="row">
                             <label class="col-lg-3 control-label">이름</label>
                             <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='10'>
+                                <input id="name" class="form-control short-input" type="text" value="" maxlength='10' required>
                             </div>
                         </div>
                         <div class="row">
                             <label class="col-lg-3 control-label">학번</label>
                             <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='8'>
+                                <input id="student_id" class="form-control short-input" type="text" value="" maxlength='8' required>
                             </div>
                         </div>
                         <div class="row">
                             <label class="col-lg-3 control-label">학과</label>
                             <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='8'>
+                                <input id="department" class="form-control short-input" type="text" value="" maxlength='8' required>
                             </div>
                         </div>
                         <div class="row">
                             <label class="col-lg-3 control-label">이메일</label>
                             <div class="col-lg-8">
-                                <input class="box mail-input" id="domain-txt" type="text"/>@
+                                <input id="email" class="box mail-input" id="domain-txt" type="text" required/>@
                                 <select class="box" id="domain-list">
                                     <option value="type">직접 입력</option>
                                     <option value="naver.com">naver.com</option>
@@ -82,29 +75,36 @@
                         <div class="row">
                             <label class="col-lg-3 control-label">전화번호</label>
                             <div class="col-lg-8">
-                                <input class="num-input" type='tel' name='phone1' maxlength='3'/>-
-                                <input class="num-input" name='phone2' maxlength='4'/>-
-                                <input class="num-input" name='phone3' maxlength='4'/>
+                                <input id="phone1" class="num-input" type='tel' name='phone1' maxlength='3' required/>-
+                                <input id="phone2" class="num-input" name='phone2' maxlength='4' required/>-
+                                <input id="phone3" class="num-input" name='phone3' maxlength='4' required/>
                             </div>
                         </div>
                         <div class="row">
                             <label class="col-lg-3 control-label">Git</label>
                             <div class="col-lg-8">
-                                <input class="form-control link-input" type="text" value="">
+                                <input id="git" class="form-control link-input" type="text" value="">
                             </div>
                         </div>
                         <div class="row">
                             <label class="col-lg-3 control-label">인스타그램</label>
                             <div class="col-lg-8">
-                                <input class="form-control link-input" type="text" value="">
+                                <input id="instagram" class="form-control link-input" type="text" value="">
                             </div>
                         </div>
-                        <div class="row ">
+                        <div class="row">
                             <label class="col-lg-3 control-label">페이스북</label>
                             <div class="col-lg-8">
-                                <input class="form-control link-input" type="text" value="">
+                                <input id="facebook" class="form-control link-input" type="text" value="">
                             </div>
-                        </div><br><hr><br>
+                        </div>
+                        <div class="row">
+    <div class="col-lg-8 offset-lg-3 ml-1">
+        <button type="button" class="btn btn-primary" onclick="toggleEditMode();">수정하기</button>
+    </div>
+</div>
+                        <br><hr><br>
+
                     </form>
                 </div>
 
@@ -139,152 +139,48 @@
 
         </div>
     </div>
-
-
-
-
-        {% endblock %}
-
 </div>
-=======
-{% extends 'schedule/base.html' %}
->>>>>>> main
+<script>
+    function showSaveConfirmation() {
+        return window.confirm("수정된 내용을 저장하시겠습니까?");
+    }
 
-{% block main_area %}
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    function toggleEditMode() {
+    // 수정 버튼을 눌렀을 때 호출되는 함수
+    var form = document.getElementById('profileForm');
+    var inputs = form.querySelectorAll('input, select');
 
+    // 입력 폼을 읽기 전용에서 편집 가능한 상태로 전환
+    inputs.forEach(function(input) {
+        input.removeAttribute('readonly');
+    });
 
-<div class="self_profile">
-    <div class="row well">
+    // 확인 버튼 추가 및 수정 버튼 비활성화
+    var saveButton = document.createElement('button');
+    saveButton.type = 'button';
+    saveButton.className = 'btn btn-success';
+    saveButton.innerText = '저장하기';
+    saveButton.onclick = function() {
+        if (showSaveConfirmation()) {
+            saveProfile();
+            // 저장 후 다시 읽기 전용으로 전환
+            inputs.forEach(function(input) {
+                input.setAttribute('readonly', 'readonly');
+            });
+            // 수정 버튼 다시 활성화
+            editButton.disabled = false;
+        }
+    };
 
-        <div class="col-md-15">
-            <div class="panel" style="height: 250px;">
-                <img class="rounded-circle border border-0 border-white shadow"
-                     src="https://avatars.githubusercontent.com/u/145529622?v=4" alt="..."
-                     style="width 40%; height: 40%; margin-top: 135px; margin-left: 20px;">
-                <div class="name ml-3" style="position: absolute; top: 170px; left: 15px; font-size:2.5rem;"><small>박서현</small></div>
-                <div class="name ml-3" style="position: absolute; top: 220px; left: 15px; font-size:1rem;">가입일: 2023.11.24</div>
-            </div>
-        </div>
+    var editButton = document.querySelector('.btn.btn-primary');
+    editButton.parentNode.replaceChild(saveButton, editButton);
 
-        <div class="container bootstrap snippets bootdey">
-            <div class="alert alert-info alert-dismissable">
-                <a class="panel-close close" data-dismiss="alert">×</a>
-                <i class="fa fa-coffee"></i>
-                공지사항 기능 <strong> 입니다</strong>.
-            </div>
-            <br><h3 class="text-dark mx-4">프로필</h3><br>
-            <div class="row mx-3">
-                <!-- left column -->
-                <!--            <div class="col-md-3">-->
-                <!--                <div class="text-center">-->
-                <!--                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="avatar img-circle img-thumbnail" alt="avatar">-->
-
-                <!--                    <input type="file" class="form-control">-->
-                <!--                </div>-->
-                <!--            </div>-->
-
-                <!-- edit form column -->
-                <div class="col-md-9 personal-info">
-                    <form class="form-horizontal" role="form">
-                        <div class="row">
-                            <label class="col-lg-3 control-label">이름</label>
-                            <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='10'>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">학번</label>
-                            <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='8'>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">학과</label>
-                            <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='8'>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">이메일</label>
-                            <div class="col-lg-8">
-                                <input class="box mail-input" id="domain-txt" type="text"/>@
-                                <select class="box" id="domain-list">
-                                    <option value="type">직접 입력</option>
-                                    <option value="naver.com">naver.com</option>
-                                    <option value="google.com">google.com</option>
-                                    <option value="hanmail.net">hanmail.net</option>
-                                    <option value="nate.com">nate.com</option>
-                                    <option value="kakao.com">kakao.com</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">전화번호</label>
-                            <div class="col-lg-8">
-                                <input class="num-input" type='tel' name='phone1' maxlength='3'/>-
-                                <input class="num-input" name='phone2' maxlength='4'/>-
-                                <input class="num-input" name='phone3' maxlength='4'/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">Git</label>
-                            <div class="col-lg-8">
-                                <input class="form-control link-input" type="text" value="">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">인스타그램</label>
-                            <div class="col-lg-8">
-                                <input class="form-control link-input" type="text" value="">
-                            </div>
-                        </div>
-                        <div class="row ">
-                            <label class="col-lg-3 control-label">페이스북</label>
-                            <div class="col-lg-8">
-                                <input class="form-control link-input" type="text" value="">
-                            </div>
-                        </div><br><hr><br>
-                    </form>
-                </div>
-
-            </div>
+    // 수정 버튼 비활성화
+    editButton.disabled = true;
+}
+</script>
 
 
-            <h3 class="text-dark mx-4">비밀번호 변경</h3><br>
-            <div class="row mx-3">
-                <div class="col-md-9 personal-info">
-                    <form class="form-horizontal" role="form">
-                        <div class="row">
-                            <label class="col-lg-3 control-label">현재 비밀번호</label>
-                            <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='10'>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">새 비밀번호</label>
-                            <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='10'>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">새 비밀번호 확인</label>
-                            <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='10'>
-                            </div><br><br>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-    </div>
+{% endblock %}
 
 
-
-
-        {% endblock %}
-
-</div>
-
->>>>>>> main
