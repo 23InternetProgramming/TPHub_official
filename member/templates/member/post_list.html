@@ -1,9 +1,5 @@
 {% extends 'member/base.html' %} {% load static %}
 
-
-
-
-
 {% block main_area %}
 <div class="member">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -29,13 +25,12 @@
                      style="visibility: visible; animation-duration: 0.3s; animation-delay: 0.3s; animation-name: fadeInUp;">
                     <div class="hover-top-in text-center">
 
-                        <a href="/self_profile"><div class="overflow-hidden z-index-1 position-relative px-5">
-                            <img
-                                    class="rounded-circle border border-5 border-white shadow"
-                                    src="{% static 'member/images/PSH.png' %}" alt="PSH"
-
-                                    title="" style="width: 80%; height: 80%;">
-                        </div></a>
+                        <a href="/self_profile">
+                            <div class="overflow-hidden z-index-1 position-relative px-5">
+                                <img
+                                        class="rounded-circle border border-5 border-white shadow"
+                                        src="{% static 'member/images/PSH.png' %}" alt="PSH"  title="" style="width: 80%; height: 80%;">
+                            </div></a>
 
                         <div class="mx-2 mx-xl-3 shadow rounded-3 position-relative mt-n4 bg-white p-4 pt-6 mx-4 text-center hover-top--in">
                             <h5 class="fw-700 dark-color mb-1"><br>박서현</h5>
@@ -64,10 +59,9 @@
                     <div class="hover-top-in text-center">
 
                         <div class="overflow-hidden z-index-1 position-relative px-5">
-                            <img
-                                    class="rounded-circle border border-5 border-white shadow"
-                                    src="{% static 'member/images/KSY.jpg' %}" title="" alt="" style="width: 80%; height: 80%;"></div>
-
+                            <img class="rounded-circle border border-5 border-white shadow"
+                                 src="{% static 'member/images/KSY.jpg' %}" title="" alt="" style="width: 80%; height: 80%;">
+                        </div>
                         <div class="mx-2 mx-xl-3 shadow rounded-3 position-relative mt-n4 bg-white p-4 pt-6 mx-4 text-center hover-top--in">
                             <h5 class="fw-700 dark-color mb-1"><br>김서연</h5>
                             <small><font color="skyblue">[백엔드]</font>
@@ -92,9 +86,11 @@
                 <div class="col-lg-4 col-sm-6 my-3 wow fadeInUp" data-wow-duration="0.3s" data-wow-delay="0.3s"
                      style="visibility: visible; animation-duration: 0.3s; animation-delay: 0.3s; animation-name: fadeInUp;">
                     <div class="hover-top-in text-center">
-                        <div class="overflow-hidden z-index-1 position-relative px-5"><img
-                                class="rounded-circle border border-5 border-white shadow"
-                                src="{% static 'member/images/YHJ.jpg' %}" title="" alt="" style="width: 80%; height: 80%;"></div>
+                        <div class="overflow-hidden z-index-1 position-relative px-5">
+                            <img
+                                    class="rounded-circle border border-5 border-white shadow"
+                                    src="{% static 'member/images/YHJ.jpg' %}" title="" alt="" style="width: 80%; height: 80%;">
+                        </div>
                         <div class="mx-2 mx-xl-3 shadow rounded-3 position-relative mt-n4 bg-white p-4 pt-6 mx-4 text-center hover-top--in">
                             <h5 class="fw-700 dark-color mb-1"><br>양희정</h5>
                             <small><font color="skyblue">[백엔드]</font>
@@ -121,7 +117,9 @@
                     <div class="hover-top-in text-center">
                         <div class="overflow-hidden z-index-1 position-relative px-5"><img
                                 class="rounded-circle border border-5 border-white shadow"
-                                src="{% static 'member/images/KEJ.png' %}" title="" alt="" style="width: 80%; height: 80%;"></div>
+
+                                src="{% static 'member/images/KEJ.png' %}" title="" alt="" style="width: 80%; height: 80%;">
+                        </div>
 
                         <div class="mx-2 mx-xl-3 shadow rounded-3 position-relative mt-n4 bg-white p-4 pt-6 mx-4 text-center hover-top--in">
                             <h5 class="fw-700 dark-color mb-1"><br>김은재</h5>
@@ -166,7 +164,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
