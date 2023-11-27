@@ -18,7 +18,7 @@ def signup(request):
             profile = Selfprofile(user=user)#signup 함수에서 user등록 시 Selfprofile과 엮어주기
             profile.save()
             auth.login(request, user)
-            return redirect('home')
+            return redirect('landing_page/base.html')
         return render(request, 'signup.html')
     else:
         return render(request, 'signup.html')
@@ -32,7 +32,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('home')
+            return redirect('landing_page/base.html')
         else:
             return render(request, 'login.html', {'error': 'username or password is incorrect'})
     else:
@@ -41,4 +41,4 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('home')
+    return redirect('landing_page/base.html')
