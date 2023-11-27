@@ -7,6 +7,7 @@ class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
     hook_text = models.CharField(max_length=100, blank=True)
+    head_image = models.ImageField(upload_to='board/category_images/%Y/%m/%d/', blank=False)
 
     def __str__(self):
         return self.name
@@ -41,7 +42,7 @@ class Post(models.Model):
         self.ordering_state = not self.ordering_state
 
     def get_absolute_url(self):
-        return f'/board/category/{self.category}/{self.pk}/'
+        return f'/board/{self.pk}/'
 
     def get_file_name(self):
         return os.path.basename(self.file_upload.name)
@@ -55,6 +56,7 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    #slug =
 
     def __str__(self):
         return f'{self.author}::{self.content}'
