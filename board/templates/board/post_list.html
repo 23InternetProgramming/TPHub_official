@@ -26,25 +26,27 @@
         {% if post_list.exists %}
             {% for p in post_list %}
 
-                <!-- 게시물 제목 -->
-                <h2 href="{{ p.get_absolute_url }}" class="card-title" style="font-size: 20px;">{{ p.title }}</h2>
+                <a href="{{ p.get_absolute_url }}">
+                    <!-- 게시물 제목 -->
+                    <h2 class="card-title" style="font-size: 20px;">{{ p.title }}</h2>
 
-                <div class="row mb-2">
-                    <div class="col-md-6">
-                        <!-- 말풍선 아이콘 -->
-                        <i class="far fa-comment-dots"></i>
-                        <!-- 조회수 -->
-                        <span class="mr-2" id="post-{{ p.id }}-views">
-                            {{ p.views|default:0 }}
-                        </span>
+                    <div class="row mb-2">
+                        <div class="col-md-6">
+                            <!-- 말풍선 아이콘 -->
+                            <i class="far fa-comment-dots"></i>
+                            <!-- 조회수 -->
+                            <span class="mr-2" id="post-{{ p.id }}-views">
+                                {{ p.views|default:0 }}
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <!-- 작성자 프로필 사진 -->
+                            <img src="{{ p.author.profile_picture.url }}" alt="{{ p.author.username }}'s profile picture" class="rounded-circle" height="30" width="30">
+                            <!-- 작성일자와 시간:분 -->
+                            {{ p.created_at }}
+                        </div>
                     </div>
-                    <div class="col-md-6 text-right">
-                        <!-- 작성자 프로필 사진 -->
-                        <img src="{{ p.author.profile_picture.url }}" alt="{{ p.author.username }}'s profile picture" class="rounded-circle" height="30" width="30">
-                        <!-- 작성일자와 시간:분 -->
-                        {{ p.created_at }}
-                    </div>
-                </div>
+                </a>
 
                 {% if not forloop.last %} <!-- 마지막 게시물이 아닌 경우에만 구분선 추가 -->
                     <hr class="mb-4">

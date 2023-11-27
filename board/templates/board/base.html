@@ -49,8 +49,16 @@
                     <div class="card-body">
                          <div class="row mb-2">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-outline-dark mr-2">전체 게시물</button>
-                                <button type="button" class="btn btn-outline-dark">카테고리</button>
+                                <button type="button" class="btn btn-outline-dark mr-2"  onclick="allPost()">전체 게시물</button>
+                                <button type="button" class="btn btn-outline-dark"  onclick="catePost()">카테고리</button>
+                                <script>
+                                  function allPost() {
+                                    window.location.href = "/board/";
+                                  }
+                                  function catePost() {
+                                    window.location.href = "/board/category/";
+                                  }
+                                </script>
                             </div>
                         </div>
                         <hr>
