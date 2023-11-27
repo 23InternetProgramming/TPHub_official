@@ -1,8 +1,37 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post, Category
+from django.shortcuts import get_object_or_404
+from .models import Post, Category, Comment
+from .forms import CommentForm
 from django.core.exceptions import PermissionDenied
+
+
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    post = comment.post
+    if request.user.is_authenticated and request.user == comment.author:
+        comment.delete()
+        return redirect(post.get_absolute_url())
+    else:
+        raise PermissionDenied
+
+def new_comment(request, pk):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, pk=pk)
+
+        if request.method == 'POST':
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.post = post
+                comment.author = request.user
+                comment.save()
+                return redirect(comment.get_absolute_url())
+        else:
+            return redirect(post.get_absolute_url())
+    else:
+        raise PermissionDenied
 
 
 class PostDelete(LoginRequiredMixin, DeleteView):
@@ -65,9 +94,9 @@ class PostDetail(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data()
         context['categories'] = Category.objects.all()
+        context['comment_form'] = CommentForm
         return context
 
-    # 현재 로그인 유저와 글쓴 유저가 같다면.. -> 글수정, 삭제 버튼 보이기
     def user_valid(self):
         current_user = self.request.user
         if current_user == self.object.auth:
@@ -87,7 +116,7 @@ def category_post(request, slug):
 
     return render(
         request,
-        '/board/post_list.html',
+        'board/post_list.html',
         {
             'post_list': post_list,
             'categories': Category.objects.all(),

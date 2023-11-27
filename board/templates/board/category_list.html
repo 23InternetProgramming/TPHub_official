@@ -1,11 +1,57 @@
 {% extends 'board/base.html' %} {% load static %}
 
-
 {% block main_area %}
 
-    <div>
-        <img src="{% static 'board/images/like_lucky.jpeg' %}" alt="">
-        <span>마치 행운의 쿼카 카테고리</span>
+<!-- 카테고리 목록 부분 -->
+<!--카테고리 사진 첨부 방법 아직 구현 못함-->
+<style>
+    .category-box {
+        display: flex;
+        flex-direction: column; /* 열로 배치하도록 설정 */
+        padding: 10px;
+    }
+
+    .category-item {
+        width: 100%; /* 카테고리 상자의 폭을 100%로 설정하여 한 열에 하나씩 배치 */
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+</style>
+
+  <section id="category-section1">
+    <div class="category-box">
+
+      {% if category_list.exists %}
+
+        {% for c in category_list %}
+          <!-- 카테고리 상자 반복 -->
+          <a href="{{ c.get_absolute_url }}">
+            <div class="category-item">
+              {% if c.head_image %} <!-- 이 if문 없으면 {{ p.head_image.url }} 이거 오류남... -->
+                <img class="center-cropped" src="{{ c.head_image.url }}" alt="{{ c }} head image">
+                <style>
+                  .center-cropped {
+                    width: 100px;
+                    height: 50px;
+                    object-fit: cover;
+                    object-position: center;
+                  }
+                </style>
+              {% endif %}
+              <h3>{{ c.name }}</h3>
+              <h4>{{ c.hook_text }}</h4>
+            </div>
+          </a>
+        {% endfor %}
+      {% endif %}
+
     </div>
+  </section>
 
 {% endblock %}
+
+
+
+<!--        <img src="{% static 'board/images/like_lucky.jpeg' %}" alt="">-->

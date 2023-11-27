@@ -1,42 +1,84 @@
 {% extends 'board/base.html' %}
 
 {% block main_area %}
-    {% if user.is_authenticated %}
-        {% if user.is_superuser or user.is_staff %}
-            <a class="btn btn-info btn-sm float-right" href="/board/create_post/" role="button">
-                <i class="fas fa-pen">글쓰기</i>
-            </a>
-        {% endif %}
-    {% endif %}
 
-    {% if post_list.exists %}
-        {% for p in post_list %}
-            <!-- Blog Post -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">{{ p.title }}</h2>
-                    <p class="card-text">{{ p.content | truncatewords:10 }}</p>
-                    <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
-                </div>
-                <div class="card-footer text-muted">
-                    Posted on {{ p.created_at }}
-                </div>
+
+<div class="center-box">
+    <!-- 공백과 선을 추가 -->
+    <div class="row">
+        <div class="col-md-7">
+            <div class="btn-group" style="margin-bottom: 10px; ">
+                <button type="button" class="btn btn-sm btn-light text-dark" style="margin-right: 5px;">최신순</button>
+                <button type="button" class="btn btn-sm btn-light text-dark">오래된순</button>
+
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser or user.is_staff %}
+                        <a class="btn btn-info btn-sm float-right" href="/board/create_post/" role="button">
+                            <i class="fas fa-pen">글쓰기</i>
+                        </a>
+                    {% endif %}
+                {% endif %}
             </div>
-        {% endfor %}
+        </div>
+    </div>
+     <hr class="mb-4"> <!-- 공백과 선을 추가 -->
 
-    {% else %}
+        {% if post_list.exists %}
+            {% for p in post_list %}
+
+                <a href="{{ p.get_absolute_url }}">
+                    <!-- 게시물 제목 -->
+                    <h2 class="card-title" style="font-size: 20px;">{{ p.title }}</h2>
+
+                    <div class="row mb-2">
+                        <div class="col-md-6">
+                            <!-- 말풍선 아이콘 -->
+                            <i class="far fa-comment-dots"></i>
+                            <!-- 조회수 -->
+                            <span class="mr-2" id="post-{{ p.id }}-views">
+                                {{ p.views|default:0 }}
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <!-- 작성자 프로필 사진 -->
+                            <img src="{{ p.author.profile_picture.url }}" alt="{{ p.author.username }}'s profile picture" class="rounded-circle" height="30" width="30">
+                            <!-- 작성일자와 시간:분 -->
+                            {{ p.created_at }}
+                        </div>
+                    </div>
+                </a>
+
+                {% if not forloop.last %} <!-- 마지막 게시물이 아닌 경우에만 구분선 추가 -->
+                    <hr class="mb-4">
+                {% endif %}
+            {% endfor %}
+        {% else %}
             <h3>아직 게시물이 없습니다.</h3>
+        {% endif %}
+    </div>
 
-    {% endif %}
+    <!-- Pagination -->
+    <!--<ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+            <a class="page-link" href="#">&larr; Older</a>
+        </li>
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Newer &rarr;</a>
+        </li>
+    </ul>-->
 
-            <!-- Pagination -->
-            <!--<ul class="pagination justify-content-center mb-4">
-                <li class="page-item">
-                    <a class="page-link" href="#">&larr; Older</a>
-                </li>
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">Newer &rarr;</a>
-                </li>
-            </ul>-->
+    <script>
+        // 클릭할 때 서버로 조회수 업데이트를 요청하는 함수
+        function updateViews(postId) {
+            // 여기에서 서버로 조회수 업데이트를 요청할 수 있음.
+            // 예: fetch('/update_views/' + postId, { method: 'POST' });
+        }
+
+        // 게시물을 클릭했을 때 조회수 증가
+        document.getElementById('post-{{ p.id }}-views').addEventListener('click', function() {
+            var postId = {{ p.id }};
+            updateViews(postId);
+        });
+    </script>
+</div>
 {% endblock %}
-
