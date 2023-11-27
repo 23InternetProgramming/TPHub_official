@@ -1,8 +1,15 @@
-{% extends 'base.html' %}
-{% block body %}
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button>회원가입 신청</button>
-    </form>
-{% endblock %}
+<form method ="POST" action="{% url 'signup' %}">
+{% csrf_token %}
+<div class="login_container">
+
+    <input name="email" type="text" class="userLogin" placeholder="학교 이메일을 작성하세요." value="">
+    <input name="name" type="text" class="userLogin" placeholder="성명" value="">
+    <input name="username" type="text" class="userLogin" placeholder="사용자 이름" value="">
+    <input name="1st_password" type="password" class="userLogin" placeholder="비밀번호" value="">
+    <input name="2nd_password" type="password" class="userLogin" placeholder="비밀번호 확인" value="">
+    <input id="loginButton" class="btn btn-primary" type="submit" value="가입하기">
+</div>
+    <footer class="join">
+        <a class="joinus">계정이 있으신가요?</a><a class="joinBtn" href="{% url 'login' %}"> 로그인</a>
+    </footer>
+</form>

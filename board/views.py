@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Category
 from django.core.exceptions import PermissionDenied
 
+
 class PostDelete(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = '/board/'
@@ -26,6 +27,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
         else:
             raise PermissionDenied
 
+
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
     fields = ['category', 'title', 'content', 'file_upload']
@@ -41,7 +43,8 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         else:
             return redirect('/board/')
 
-class PostList(ListView) :
+
+class PostList(ListView):
     model = Post
     ordering = '-pk'
     ordering_state = True
@@ -54,6 +57,7 @@ class PostList(ListView) :
         context = super(PostList, self).get_context_data()
         context['categories'] = Category.objects.all()
         return context
+
 
 class PostDetail(LoginRequiredMixin, DetailView):
     model = Post
@@ -71,20 +75,22 @@ class PostDetail(LoginRequiredMixin, DetailView):
         else:
             return False
 
+
 class CategoryList(ListView):
     model = Category
     ordering = ['name']
+
 
 def category_post(request, slug):
     category = Category.objects.get(slug=slug)
     post_list = Post.objects.filter(category=category)
 
-    return render (
+    return render(
         request,
         '/board/post_list.html',
         {
-            'post_list' : post_list,
-            'categories' : Category.objects.all(),
-            'category' : category,
+            'post_list': post_list,
+            'categories': Category.objects.all(),
+            'category': category,
         }
     )
