@@ -9,15 +9,15 @@
     <div class="row">
         <div class="col-md-7">
             <div class="btn-group" style="margin-bottom: 10px; ">
-                <button type="button" class="btn btn-sm btn-light text-dark" onclick="{{ post.change_ordering }}">최신순</button>
-                <button type="button" class="btn btn-sm btn-light text-dark" onclick="changeOrdering('-pk')">오래된순</button>
+                <button type="button" class="btn btn-sm btn-light text-dark" onclick="sortByDate('-created_at')">최신순</button>
+                <button type="button" class="btn btn-sm btn-light text-dark" onclick="sortByDate('created_at')">오래된순</button>
 
-                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                 <script>
-                    function changeOrdering(ordering) {
-
+                    function sortByDate(order) {
+                        window.location.href = `/board/?ordering=${order}`;
                     }
                 </script>
+                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
                 {% if user.is_authenticated %}
                     {% if user.is_superuser or user.is_staff %}
@@ -69,23 +69,3 @@
         {% endif %}
 </div>
 {% endblock %}
-
-<!--
-조회수
-<span class="mr-2" id="post-{{ p.id }}-views">
-    {{ p.views|default:0 }}
-</span>
-<script>
-    // 클릭할 때 서버로 조회수 업데이트를 요청하는 함수
-    function updateViews(postId) {
-        // 여기에서 서버로 조회수 업데이트를 요청할 수 있음.
-        // 예: fetch('/update_views/' + postId, { method: 'POST' });
-    }
-
-    // 게시물을 클릭했을 때 조회수 증가
-    document.getElementById('post-{{ p.id }}-views').addEventListener('click', function() {
-        var postId = {{ p.id }};
-        updateViews(postId);
-    });
-</script>
--->

@@ -4,43 +4,39 @@
 {% load static %}
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'schedule/css/styles.css' %}">
-
   <link rel="stylesheet" href="{% static 'landing_page/bootstrap/bootstrap.min.css' %}" media="screen">
-  <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+  <!--  <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>-->
+
+  <!-- Required meta tags -->
+    <!--  <meta charset="utf-8">-->
+    <!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+  <!-- Bootstrap CSS -->
+    <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'schedule/css/styles.css' %}"> <!-- calendar_area를 위한 css -->
 
   <title>TPhub</title>
 </head>
+
 <body>
   <!-- NavBar -->
   {% include 'landing_page/navbar.html' %}
 
-  <div class="container my-3">
-    <div class="row centered-element">
+  <div class=" my-3 ">
+    <div class="row justify-content-center">
 
       <div class="col-md-3 offset-md-0" id="left-area">
-
         <!-- 개일일정 박스 -->
         <div class="card my-4 mx-0">
           개인일정 넣고 싶음
         </div>
-
       </div>
-
       <div class="col-md-8">
-
         <!-- 단체 스케줄 달력 박스 -->
         <div class="card-body" style="min-height: 700px;">
-          {% block calendar_area %}
-          {% endblock %}
+            {% block calendar_area %}
+            {% endblock %}
         </div>
-
       </div>
 
     </div>
@@ -48,18 +44,15 @@
 
   <!-- Footer -->
   {% include 'landing_page/footer.html' %}
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-          integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-          crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-          integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-          crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-          crossorigin="anonymous"></script>
-
-  {% block script %}
-  {% endblock %}
 </body>
 </html>
 
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>

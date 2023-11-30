@@ -17,7 +17,7 @@ def index(request) :
 class EventDeleteView(generic.DeleteView):
     model = Event
     template_name = 'schedule/event_confirm_delete.html'
-    success_url = reverse_lazy('schedule:calendar')
+    success_url = '/schedule/' #reverse_lazy('schedule:calendar')
 
 class CalendarView(generic.ListView):
     model = Event
