@@ -28,7 +28,7 @@
 
         {% for c in category_list %}
           <!-- 카테고리 상자 반복 -->
-          <a href="{{ c.get_absolute_url }}">
+          <a href="{{ c.get_absolute_url }}" style="text-decoration: none; color:black;">
             <div class="category-item">
               {% if c.head_image %}
                 <img class="center-cropped" src="{{ c.head_image.url }}" alt="{{ c }} head image">
@@ -42,7 +42,7 @@
                 </style>
               {% endif %}
               <h3>{{ c.name }}</h3>
-              <h4>{{ c.hook_text }}</h4>
+              <h5>{{ c.hook_text }}</h5>
             </div>
           </a>
         {% endfor %}

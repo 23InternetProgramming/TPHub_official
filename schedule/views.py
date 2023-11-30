@@ -79,7 +79,6 @@ def get_date(req_day):
         return date(year, month, day=1)
     return datetime.today()
 
-
 def event(request, event_id=None):
     instance = Event()
     if event_id:

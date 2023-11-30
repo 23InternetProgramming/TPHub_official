@@ -3,9 +3,11 @@
 
 {% load static %}
 
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'board/css/button.css' %}">
+</head>
 
-<div class="center-box">
-    <!-- 공백과 선을 추가 -->
+<div class="container">
     <div class="row">
         <div class="col-md-7">
             <div class="btn-group" style="margin-bottom: 10px; ">
@@ -18,54 +20,55 @@
                     }
                 </script>
                 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-                {% if user.is_authenticated %}
-                    {% if user.is_superuser or user.is_staff %}
-                        <a class="btn btn-info btn-sm float-right" href="/board/create_post/" role="button">
-                            <i class="fas fa-pen">글쓰기</i>
-                        </a>
-                    {% endif %}
-                {% endif %}
             </div>
         </div>
+        <div class="col-md-5 text-end">
+            {% if user.is_authenticated %}
+            {% if user.is_superuser or user.is_staff %}
+            <a class="btn btn-dark btn-sm" href="/board/create_post/" role="button"
+               style="background-color: transparent; border-color: black; color: black;">
+                <i class="fas fa-pen"></i> 글쓰기
+            </a>
+            {% endif %}
+            {% endif %}
+        </div>
     </div>
-    <hr class="mb-4"> <!-- 공백과 선을 추가 -->
-        {% if post_list.exists %}
-            {% for p in post_list %}
-                <a class="centered-element" href="{{ p.get_absolute_url }}">
+    <hr>
 
-                    <div class="row mb-2">
-                        <!-- 게시물 제목 / 작성자 / 카테고리 -->
-                        <div class="col-md-6">
-                            <div class="row mb-2">{{ p.title }}</div>
-                            <div class="row mb-2">{{ p.author }} ⦁ {{ p.category }}</div>
-                        </div>
-                        <!-- 댓글수 -->
-                        <div class="col-md-2">
-                            <i class="far fa-comment-dots"></i>
-                            <span class="mr-2" >
-                                {% if p.comment_set.exists %}
-                                    {{ p.comment_set.count }}
-                                {% else %}
-                                    0
-                                {% endif %}
-                            </span>
-                        </div>
-                        <!-- 작성자 프로필 사진 / 작성일자 및 시간 -->
-                        <div class="col-md-4 text-right">
-                            <img src="{{ p.author.profile_picture.url }}" alt="" style="background:green"
-                                 class="rounded-circle" height="30" width="30">
-                            <span>{{ p.created_at }}</span>
-                        </div>
-                    </div>
-                </a>
-
-                {% if not forloop.last %} <!-- 마지막 게시물이 아닌 경우에만 구분선 추가 -->
-                    <hr class="mb-4">
-                {% endif %}
-            {% endfor %}
-        {% else %}
-            <h3>아직 게시물이 없습니다.</h3>
-        {% endif %}
+    {% if post_list.exists %}
+    {% for p in post_list %}
+    <a class="centered-element" href="{{ p.get_absolute_url }}" style="text-decoration: none; color:black;">
+        <div class="row mb-2">
+            <!-- 게시물 제목 / 작성자 / 카테고리 -->
+            <div class="col-md-6">
+                <div class="row mb-2">{{ p.title }}</div>
+                <div class="row mb-2">{{ p.author }} ⦁ {{ p.category }}</div>
+            </div>
+            <!-- 댓글수 -->
+            <div class="col-md-2">
+                <i class="far fa-comment-dots"></i>
+                <span class="mr-2" >
+                    {% if p.comment_set.exists %}
+                        {{ p.comment_set.count }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </span>
+            </div>
+            <!-- 작성자 프로필 사진 / 작성일자 및 시간 -->
+            <div class="col-md-4 text-right">
+                <img src="{{ p.author.profile_picture.url }}" alt="" style="background:green"
+                     class="rounded-circle" height="30" width="30">
+                <span style="font-size: 0.7em;">{{ p.created_at }}</span>
+            </div>
+        </div>
+    </a>
+    {% if not forloop.last %} <!-- 마지막 게시물이 아닌 경우에만 구분선 추가 -->
+        <hr class="mb-4">
+    {% endif %}
+    {% endfor %}
+    {% else %}
+        <h3>아직 게시물이 없습니다.</h3>
+    {% endif %}
 </div>
 {% endblock %}
