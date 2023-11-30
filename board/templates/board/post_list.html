@@ -10,36 +10,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-7">
-            <div class="btn-group" style="margin-bottom: 1px; ">
-                <button type="button" class="btn btn-sm btn-light text-dark custom-btn"
-                        onclick="{{ post.change_ordering }}"> 최신순 </button>
-                <button type="button" class="btn btn-sm btn-light text-dark custom-btn"
-                        onclick="changeOrdering('-pk')"> 오래된순 </button>
+            <div class="btn-group" style="margin-bottom: 10px; ">
+                <button type="button" class="btn btn-sm btn-light text-dark" onclick="sortByDate('-created_at')">최신순</button>
+                <button type="button" class="btn btn-sm btn-light text-dark" onclick="sortByDate('created_at')">오래된순</button>
 
-                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                 <script>
-                    function changeOrdering(ordering) {
-                        // AJAX를 사용하여 서버에 순서 변경 요청을 보냅니다.
-                        $.ajax({
-                            type: 'POST',
-                            url: '/board/',  // 서버의 실제 경로로 변경해야 합니다.
-                            data: {
-                                'ordering': post.change_ordering,
-                                'csrfmiddlewaretoken': '{{ csrf_token }}',
-                            },
-                            success: function (data) {
-                                // 성공적으로 응답을 받았을 때의 동작을 정의할 수 있습니다.
-                                console.log('순서 변경 성공');
-                            },
-                            error: function (xhr, errmsg, err) {
-                                // 오류 발생 시 처리할 동작을 정의할 수 있습니다.
-                                console.log('순서 변경 실패');
-                            }
-                        });
+                    function sortByDate(order) {
+                        window.location.href = `/board/?ordering=${order}`;
                     }
-
-
                 </script>
+                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             </div>
         </div>
         <div class="col-md-5 text-end">
@@ -53,13 +33,11 @@
             {% endif %}
         </div>
     </div>
-
     <hr>
 
     {% if post_list.exists %}
     {% for p in post_list %}
     <a class="centered-element" href="{{ p.get_absolute_url }}" style="text-decoration: none; color:black;">
-
         <div class="row mb-2">
             <!-- 게시물 제목 / 작성자 / 카테고리 -->
             <div class="col-md-6">
@@ -69,13 +47,13 @@
             <!-- 댓글수 -->
             <div class="col-md-2">
                 <i class="far fa-comment-dots"></i>
-                <span class="mr-2">
-                                {% if p.comment_set.exists %}
-                                    {{ p.comment_set.count }}
-                                {% else %}
-                                    0
-                                {% endif %}
-                            </span>
+                <span class="mr-2" >
+                    {% if p.comment_set.exists %}
+                        {{ p.comment_set.count }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </span>
             </div>
             <!-- 작성자 프로필 사진 / 작성일자 및 시간 -->
             <div class="col-md-4 text-right">
@@ -85,33 +63,12 @@
             </div>
         </div>
     </a>
-
     {% if not forloop.last %} <!-- 마지막 게시물이 아닌 경우에만 구분선 추가 -->
-    <hr class="mb-4">
+        <hr class="mb-4">
     {% endif %}
     {% endfor %}
     {% else %}
-    <h3>아직 게시물이 없습니다.</h3>
+        <h3>아직 게시물이 없습니다.</h3>
     {% endif %}
 </div>
 {% endblock %}
-
-<!--
-조회수
-<span class="mr-2" id="post-{{ p.id }}-views">
-    {{ p.views|default:0 }}
-</span>
-<script>
-    // 클릭할 때 서버로 조회수 업데이트를 요청하는 함수
-    function updateViews(postId) {
-        // 여기에서 서버로 조회수 업데이트를 요청할 수 있음.
-        // 예: fetch('/update_views/' + postId, { method: 'POST' });
-    }
-
-    // 게시물을 클릭했을 때 조회수 증가
-    document.getElementById('post-{{ p.id }}-views').addEventListener('click', function() {
-        var postId = {{ p.id }};
-        updateViews(postId);
-    });
-</script>
--->

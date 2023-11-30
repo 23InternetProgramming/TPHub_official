@@ -1,88 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+
 {% load static %}
 
-<html>
 <head>
-    <title>TPHub</title>
-    <link rel="stylesheet" href="{% static 'landing_page/bootstrap/bootstrap.min.css' %}" media="screen">
-    <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'landing_page/bootstrap/bootstrap.min.css' %}" media="screen">
+  <!--  <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>-->
+
+  <!-- Required meta tags -->
+    <!--  <meta charset="utf-8">-->
+    <!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+  <!-- Bootstrap CSS -->
+    <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'schedule/css/styles.css' %}"> <!-- calendar_area를 위한 css -->
+
+  <title>TPhub</title>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-    <!-- NavBar -->
-    {% include 'landing_page/navbar.html' %}
+<body>
+  <!-- NavBar -->
+  {% include 'landing_page/navbar.html' %}
 
-    <!-- Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="logInModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="logInModalLabel"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log In</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <!-- boot5에 적용해야한다 함 data-bs-dismiss 이거 2개 -->
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-outline-primary btn-block btn-sm"><i class="fa-brands fa-google"></i> Log in with Google</button>
-                            <button type="button" class="btn btn-outline-secondary btn-block btn-sm"><i class="fa-regular fa-envelope"></i> Sign up with E-mail</button>
-                        </div>
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-outline-success btn-block btn-sm"><i class="fa-solid fa-n"></i> Log in with Naver</button>
-                            <button type="button" class="btn btn-outline-secondary btn-block btn-sm"><i class="fa-regular fa-envelope"></i> Log in with E-mail</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+  <div class=" my-3 ">
+    <div class="row justify-content-center">
+
+      <div class="col-md-3 offset-md-0" id="left-area">
+        <!-- 개일일정 박스 -->
+        <div class="card my-4 mx-0">
+            {% include 'schedule/index.html' %}
         </div>
-    </div>
-
-    <div class="container my-3">
-        <div class="row">
-            <div class="col-md-3">
-                <!-- 좌측 박스 -->
-                <div class="card my-4">
-                    <h5 class="card-header">콘텐츠 1</h5>
-                    <div class="card-body">
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6" id="main-area">
-                <div class="card my-4">
-                    <div class="card-body">
-                        {% block main_area %}
-                        {% endblock %}
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <!-- 우측 박스 -->
-                <div class="card my-4">
-                    <h5 class="card-header">콘텐츠 3</h5>
-                    <div class="card-body">
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-8">
+        <!-- 단체 스케줄 달력 박스 -->
+        <div class="card-body" style="min-height: 700px;">
+            {% block calendar_area %}
+            {% endblock %}
         </div>
+      </div>
+
     </div>
+  </div>
 
-    <!-- Footer -->
-    {% include 'landing_page/footer.html' %}
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+  <!-- Footer -->
+    <!-- {'% include 'landing_page/footer.html' %} -->
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
