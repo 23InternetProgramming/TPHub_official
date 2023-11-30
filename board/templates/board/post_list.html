@@ -3,15 +3,18 @@
 
 {% load static %}
 
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'board/css/button.css' %}">
+</head>
 
 <div class="container">
     <div class="row">
         <div class="col-md-7">
-            <div class="btn-group" style="margin-bottom: 0px; ">
-                <button type="button" class="btn btn-sm btn-light text-dark" onclick="{{ post.change_ordering }}">최신순
-                </button>
-                <button type="button" class="btn btn-sm btn-light text-dark" onclick="changeOrdering('-pk')">오래된순
-                </button>
+            <div class="btn-group" style="margin-bottom: 1px; ">
+                <button type="button" class="btn btn-sm btn-light text-dark custom-btn"
+                        onclick="{{ post.change_ordering }}"> 최신순 </button>
+                <button type="button" class="btn btn-sm btn-light text-dark custom-btn"
+                        onclick="changeOrdering('-pk')"> 오래된순 </button>
 
                 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                 <script>
@@ -34,21 +37,24 @@
                             }
                         });
                     }
+
+
                 </script>
             </div>
-
+        </div>
+        <div class="col-md-5 text-end">
             {% if user.is_authenticated %}
             {% if user.is_superuser or user.is_staff %}
-            <a class="btn btn-dark btn-sm float-end" href="/board/create_post/" role="button"
-               style="background-color: transparent; border-color: black;color: black; float-end">
-                <i class="fas fa-pen">글쓰기</i>
+            <a class="btn btn-dark btn-sm" href="/board/create_post/" role="button"
+               style="background-color: transparent; border-color: black; color: black;">
+                <i class="fas fa-pen"></i> 글쓰기
             </a>
             {% endif %}
             {% endif %}
-
         </div>
     </div>
-    <hr class="mb-4"> <!-- 공백과 선을 추가 -->
+
+    <hr>
 
     {% if post_list.exists %}
     {% for p in post_list %}
@@ -75,7 +81,7 @@
             <div class="col-md-4 text-right">
                 <img src="{{ p.author.profile_picture.url }}" alt="" style="background:green"
                      class="rounded-circle" height="30" width="30">
-                <span>{{ p.created_at }}</span>
+                <span style="font-size: 0.7em;">{{ p.created_at }}</span>
             </div>
         </div>
     </a>
