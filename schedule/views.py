@@ -12,7 +12,17 @@ from .models import *
 from .utils import Calendar
 
 def index(request) :
-    return HttpResponse('hello')
+    todos = Todo.objects.all()
+    print("From DB: ", todos)
+    content = {'todos' : todos}
+    return render(request, "schedule/index.html", content)
+
+def createTodo(request):
+    user_input_str = request.POST['todoContent']
+    new_todo = Todo(content=user_input_str)
+    # author이 자동으로 채워지도록 코드 추가
+    new_todo.save()
+    return HttpResponseRedirect(reverse('index'))
 
 class EventDeleteView(generic.DeleteView):
     model = Event

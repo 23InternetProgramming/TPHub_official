@@ -1,10 +1,13 @@
 from django.conf.urls import url
+from django.urls import path
+
 from . import views
 from .views import EventDeleteView
 
 app_name = 'schedule'
 urlpatterns = [
-    url(r'^index/$', views.index, name='index'),
+    path('index', views.index, name='index'),
+    path('createTodo', views.createTodo, name="createTodo"),
     url(r'^$', views.CalendarView.as_view(), name='calendar'),
     url(r'^event/new/$', views.event, name='event_new'),
     url(r'^event/edit/(?P<event_id>\d+)/$', views.event, name='event_edit'),
