@@ -36,25 +36,25 @@
                 <div class="col-md-9 personal-info">
                     <form class="form-horizontal" role="form" id="profileForm" onsubmit="return showSaveConfirmation()">
                         <div class="row">
-                            <label class="col-lg-3 control-label">이름</label>
+                            <label class="col-lg-3 control-label">이름<sup>*</sup></label>
                             <div class="col-lg-8">
                                 <input id="name" class="form-control short-input" type="text" value="" maxlength='10' required>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-lg-3 control-label">학번</label>
+                            <label class="col-lg-3 control-label">학번<sup>*</sup></label>
                             <div class="col-lg-8">
                                 <input id="student_id" class="form-control short-input" type="text" value="" maxlength='8' required>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-lg-3 control-label">학과</label>
+                            <label class="col-lg-3 control-label">학과<sup>*</sup></label>
                             <div class="col-lg-8">
                                 <input id="department" class="form-control short-input" type="text" value="" maxlength='8' required>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-lg-3 control-label">이메일</label>
+                            <label class="col-lg-3 control-label">이메일<sup>*</sup></label>
                             <div class="col-lg-8">
                                 <input id="email" class="box mail-input" id="domain-txt" type="text" required/>@
                                 <select class="box" id="domain-list">
@@ -68,11 +68,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-lg-3 control-label">전화번호</label>
+                            <label class="col-lg-3 control-label">전화번호<sup>*</sup></label>
                             <div class="col-lg-8">
                                 <input id="phone1" class="num-input" type='tel' name='phone1' maxlength='3' required/>-
                                 <input id="phone2" class="num-input" name='phone2' maxlength='4' required/>-
                                 <input id="phone3" class="num-input" name='phone3' maxlength='4' required/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-lg-3 control-label">포지션</label>
+                            <div class="col-lg-8">
+                                <input id="role" class="form-control link-input" type="text" value="">
                             </div>
                         </div>
                         <div class="row">
