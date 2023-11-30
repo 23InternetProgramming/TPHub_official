@@ -77,6 +77,7 @@ class PostList(ListView) :
     def change_ordering(self):
         self.ordering = 'pk' if self.ordering_state else '-pk'
         self.ordering_state = not self.ordering_state
+        return self.ordering
 
     def get_context_data(self, **kwargs):
         context = super(PostList, self).get_context_data()

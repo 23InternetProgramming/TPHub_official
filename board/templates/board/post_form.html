@@ -1,5 +1,7 @@
 {% extends 'board/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block head_title %}
     Create Post
 {% endblock %}
@@ -10,9 +12,10 @@
         <form method = "post" enctype = "multipart/form-data">
             {% csrf_token %}
                 <table>
-                    {{ form }}
+                    {{ form | crispy }}
                 </table>
-                <button type="submit"> Submit</button>
+            <br/>
+                <button type="submit" class="btn btn-secondary float-right"> Submit</button>
         </form>
 {% endblock %}
 
@@ -20,7 +23,7 @@
 
 
 <!--// ==============================================================-->
-<!--{% block main_area %}-->
+
 <!--    <div class="container">-->
 <!--        <form method="post" enctype="multipart/form-data">-->
 <!--            {% csrf_token %}-->
@@ -64,5 +67,5 @@
 <!--            </div>-->
 <!--        </form>-->
 <!--    </div>-->
-<!--{% endblock %}-->
+
 
