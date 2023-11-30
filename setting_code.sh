@@ -10,4 +10,5 @@ echo "-----------python –m pip install pillow -----------"
 python -m pip install pillow
 echo "------------pip install beautifulsoup4-------------"
 pip install beautifulsoup4
-
+echo "----------pip install django-crispy-forms----------"
+pip install django-crispy-forms

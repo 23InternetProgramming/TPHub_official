@@ -46,25 +46,25 @@
     <div class="container-fluid my-3">
         <div class="row">
             <div class="col-md-8 mx-auto" id="main-area">
-                    <div class="card-body">
-                         <div class="row mb-2">
-                            <div class="col-md-12">
-                                <button type="button" class="btn btn-outline-dark mr-2"  onclick="allPost()">전체 게시물</button>
-                                <button type="button" class="btn btn-outline-dark"  onclick="catePost()">카테고리</button>
-                                <script>
-                                  function allPost() {
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-outline-dark mr-2"  onclick="allPost()">전체 게시물</button>
+                            <button type="button" class="btn btn-outline-dark"  onclick="catePost()">카테고리</button>
+                            <script>
+                                function allPost() {
                                     window.location.href = "/board/";
-                                  }
-                                  function catePost() {
+                                }
+                                function catePost() {
                                     window.location.href = "/board/category/";
-                                  }
-                                </script>
-                            </div>
+                                }
+                            </script>
                         </div>
-                        <hr>
-                        {% block main_area %}
-                        {% endblock %}
                     </div>
+                    <hr>
+                    {% block main_area %}
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </div>

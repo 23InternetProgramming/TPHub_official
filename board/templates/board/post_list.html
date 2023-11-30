@@ -2,116 +2,170 @@
 {% block main_area %}
 
 {% load static %}
+{% load crispy_forms_tags %}
 
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'board/css/button.css' %}">
-</head>
+<link href="{% static 'blog/bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'board/css/comment.css' %}">
+<script src="https://kit.fontawesome.com/a1066371f8.js" crossorigin="anonymous"></script>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-7">
-            <div class="btn-group" style="margin-bottom: 1px; ">
-                <button type="button" class="btn btn-sm btn-light text-dark custom-btn"
-                        onclick="{{ post.change_ordering }}"> 최신순 </button>
-                <button type="button" class="btn btn-sm btn-light text-dark custom-btn"
-                        onclick="changeOrdering('-pk')"> 오래된순 </button>
+<!-- Page content-->
+<div class="row">
 
-                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-                <script>
-                    function changeOrdering(ordering) {
-                        // AJAX를 사용하여 서버에 순서 변경 요청을 보냅니다.
-                        $.ajax({
-                            type: 'POST',
-                            url: '/board/',  // 서버의 실제 경로로 변경해야 합니다.
-                            data: {
-                                'ordering': post.change_ordering,
-                                'csrfmiddlewaretoken': '{{ csrf_token }}',
-                            },
-                            success: function (data) {
-                                // 성공적으로 응답을 받았을 때의 동작을 정의할 수 있습니다.
-                                console.log('순서 변경 성공');
-                            },
-                            error: function (xhr, errmsg, err) {
-                                // 오류 발생 시 처리할 동작을 정의할 수 있습니다.
-                                console.log('순서 변경 실패');
-                            }
-                        });
-                    }
+    <div class="col-lg-8">
+        <!-- Post header-->
+        <header class="mb-4">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <!-- 작성자 프로필 사진 및 정보 -->
+                <div class="d-flex align-items-center">
+                    <!-- 작성자 프로필 사진 (원 모양) -->
+                    <img src="{{ post.author.profile_picture.url }}" alt="{{ post.author.username }}'s profile picture" class="rounded-circle" height="40" width="40">
+                    <div class="ms-2">
+                        <!-- 작성자 이름 -->
+                        <div>{{ post.author.username }}</div>
+                        <!-- 작성일자와 시간:분 -->
+                        <div class="text-muted"> {{ post.created_at }}</div>
+                    </div>
+                </div>
 
-
-                </script>
+                <!-- 딜리트, 에딧 버튼 -->
+                {% if user.is_authenticated and user == post.author %}
+                <div class>
+                    <a class="btn btn-outline-dark" href="/board/update_post/{{ post.pk }}" role="button">Edit Post</a>
+                    <a class="btn btn-outline-dark" href="/board/delete_post/{{ post.pk }}" role="button">Delete Post</a>
+                </div>
+                {% endif %}
             </div>
-        </div>
-        <div class="col-md-5 text-end">
-            {% if user.is_authenticated %}
-            {% if user.is_superuser or user.is_staff %}
-            <a class="btn btn-dark btn-sm" href="/board/create_post/" role="button"
-               style="background-color: transparent; border-color: black; color: black;">
-                <i class="fas fa-pen"></i> 글쓰기
+
+            <!-- 게시물 제목 -->
+            <h1 class="fw-bolder mb-4" style="font-size: 2em;">{{ post.title }}</h1>
+
+            <!-- 게시물 내용 -->
+            <section class="mb-5">
+                <p class="fs-5 mb-4">{{ post.content }}</p>
+            </section>
+
+            <!-- 파일 다운 버튼 생성 -->
+            {% if post.file_upload %}
+            <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button" download>
+                Download :
+                {% if post.get_file_ext == 'csv' %}
+                <i class="fa-solid fa-file-csv"></i>
+                {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                <i class="fa-solid fa-file-excel"></i>
+                {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+                <i class="fa-solid fa-file-word"></i>
+                {% else %}
+                <i class="fa-solid fa-file"></i>
+                {% endif %}
+                {{ post.get_file_name }}
             </a>
             {% endif %}
+        </header>
+
+        <hr class="mb-4" style="margin-bottom: 5px;  margin-top: 30px;">
+
+        <!-- Comments section-->
+
+        <div id="comment-area">
+            <!-- Comments Form -->
+            <div class="card my-4">
+                <div class="card-body">
+                    <div class="comment-header">
+                        {% if post.comment_set.exists %}
+                                <p>댓글 ({{ post.comment_set.count }})</p>
+                            {% else %}
+                                <p>댓글 (0)</p>
+                            {% endif %}
+                    </div>
+                    {% if user.is_authenticated %}
+                        <form id="comment-form" method="POST" action="{{ post.get_absolute_url }}new_comment/">
+                            {% csrf_token %}
+                            <div class="form-group comment-form">
+                                {{ comment_form | crispy }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    {% else %}
+                        <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#" data-toggle="modal"
+                       data-target="#loginModal">
+                        Log in and leave a comment
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if post.comment_set.exists %}
+            {% for comment in post.comment_set.iterator %}
+                <!-- Single Comment -->
+                <div class="media mb-4" id="comment-{{ comment.pk }}">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body">
+                        {% if user.is_authenticated and comment.author == user %}
+                            <div class="float-right">
+                                <a role="button"
+                                   href="#"
+                                   id="comment-{{ comment.pk }}-delete-modal-btn"
+                                   class="btn btn-sm btn-danger"
+                                   data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}">
+                                    delete
+                                </a>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="deleteCommentModal-{{ comment.pk }}" tabindex="-1"
+                                 role="dialog" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">
+                                                정말 해당 댓글을 삭제하시겠습니까?
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <del>{{ comment | linebreaks }}</del>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <a role="button" class="btn btn-danger" href="/board/delete_comment/{{ comment.pk }}/">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                            <h5 class="mt-0">{{ comment.author.username }} &nbsp;&nbsp;<small class="text-muted">{{ comment.created_at }}</small></h5>
+                            <p>{{ comment.content | linebreaks }}</p>
+                    </div>
+                </div>
+            {% endfor %}
             {% endif %}
         </div>
     </div>
 
-    <hr>
-
-    {% if post_list.exists %}
-    {% for p in post_list %}
-    <a class="centered-element" href="{{ p.get_absolute_url }}" style="text-decoration: none; color:black;">
-
-        <div class="row mb-2">
-            <!-- 게시물 제목 / 작성자 / 카테고리 -->
-            <div class="col-md-6">
-                <div class="row mb-2">{{ p.title }}</div>
-                <div class="row mb-2">{{ p.author }} ⦁ {{ p.category }}</div>
-            </div>
-            <!-- 댓글수 -->
-            <div class="col-md-2">
-                <i class="far fa-comment-dots"></i>
-                <span class="mr-2">
-                                {% if p.comment_set.exists %}
-                                    {{ p.comment_set.count }}
-                                {% else %}
-                                    0
-                                {% endif %}
-                            </span>
-            </div>
-            <!-- 작성자 프로필 사진 / 작성일자 및 시간 -->
-            <div class="col-md-4 text-right">
-                <img src="{{ p.author.profile_picture.url }}" alt="" style="background:green"
-                     class="rounded-circle" height="30" width="30">
-                <span style="font-size: 0.7em;">{{ p.created_at }}</span>
+    <div class="col-lg-4">
+    <!-- Categories Widget -->
+        <div class="card my-4">
+            <div class="card-body">
+                <p>"{{ post.category }}"의 다른 게시물</p>
+                {% for category in categories %}
+                    {% if category == post.category %}
+                        <ul class="list-unstyled mb-0">
+                            {% for c in category.get_queryset|slice:":3" %}
+                            <li>
+                                <a href="{{ c.get_absolute_url }}">
+                                    {{ c.title|slice:":10" }}{% if c.title|length > 10 %}...{% endif %}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <a href="{{ category.get_absolute_url }}">더보기</a>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
-    </a>
+    </div>
 
-    {% if not forloop.last %} <!-- 마지막 게시물이 아닌 경우에만 구분선 추가 -->
-    <hr class="mb-4">
-    {% endif %}
-    {% endfor %}
-    {% else %}
-    <h3>아직 게시물이 없습니다.</h3>
-    {% endif %}
 </div>
+
 {% endblock %}
-
-<!--
-조회수
-<span class="mr-2" id="post-{{ p.id }}-views">
-    {{ p.views|default:0 }}
-</span>
-<script>
-    // 클릭할 때 서버로 조회수 업데이트를 요청하는 함수
-    function updateViews(postId) {
-        // 여기에서 서버로 조회수 업데이트를 요청할 수 있음.
-        // 예: fetch('/update_views/' + postId, { method: 'POST' });
-    }
-
-    // 게시물을 클릭했을 때 조회수 증가
-    document.getElementById('post-{{ p.id }}-views').addEventListener('click', function() {
-        var postId = {{ p.id }};
-        updateViews(postId);
-    });
-</script>
--->

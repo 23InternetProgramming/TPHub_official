@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Post
+from schedule.models import Event, Todo
 
-admin.site.register(Post)
+admin.site.register(Event)
+admin.site.register(Todo)
