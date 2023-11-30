@@ -1,22 +1,18 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth.hashers import make_password
-from .models import Account
+from account.forms import UserForm
 
 
-# Create your views here.
-def register(request):
+def signup(request):
     if request.method == "POST":
-        username = request.POST.get['username', None]
-        password = request.POST.get['password', None]
-        re_password = request.POST.get['re_password',None]
-        res_data = {}
-        if not (username and password and re_password):
-            res_data['error'] = "모든 값을 입력해야 합니다."
-        if password != re_password:
-            res_data['error'] = "비밀번호가 다릅니다."
-        else:
-            user = Account(username=username, password=make_password(password))
-            user.save()
-        return render(request, 'register.html', res_data)
-
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)  # 사용자 인증
+            login(request, user)  # 로그인
+            return redirect('index')
+    else:
+        form = UserForm()
+    return render(request, 'account/signup.html', {'form': form})
