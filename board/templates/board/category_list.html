@@ -1,6 +1,7 @@
-{% extends 'board/base.html' %} {% load static %}
-
+{% extends 'board/base.html' %}
 {% block main_area %}
+
+{% load static %}
 
 <!-- 카테고리 목록 부분 -->
 <!--카테고리 사진 첨부 방법 아직 구현 못함-->
@@ -27,9 +28,9 @@
 
         {% for c in category_list %}
           <!-- 카테고리 상자 반복 -->
-          <a href="{{ c.get_absolute_url }}">
+          <a href="{{ c.get_absolute_url }}" style="text-decoration: none; color:black;">
             <div class="category-item">
-              {% if c.head_image %} <!-- 이 if문 없으면 {{ p.head_image.url }} 이거 오류남... -->
+              {% if c.head_image %}
                 <img class="center-cropped" src="{{ c.head_image.url }}" alt="{{ c }} head image">
                 <style>
                   .center-cropped {
@@ -41,7 +42,7 @@
                 </style>
               {% endif %}
               <h3>{{ c.name }}</h3>
-              <h4>{{ c.hook_text }}</h4>
+              <h5>{{ c.hook_text }}</h5>
             </div>
           </a>
         {% endfor %}

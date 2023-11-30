@@ -1,41 +1,70 @@
 <!-- Footer -->
-<footer class="py-1" style="background-color: #E2E2E2;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .social-icon {
+            font-size: 30px;
+            color: #333333;
+            margin-right: 10px;
+             transition: color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: #FF1493;
+        }
+    </style>
+</head>
+
+<footer class="py-3" style="background-color: #E2E2E2;">
+
     <div class="container">
         <div class="row">
             <div class="col-md-3"></div>
 
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col-md-3 card" style="background-color: #E2E2E2; font-size: 10px; border:none">
+                    <div class="col-md-3 card text-center"
+                         style="background-color: #E2E2E2; font-size: 15px; border:none">
                         <div class="card-body">
                             <div>TPHub</div>
                         </div>
                     </div>
-                    <div class="col-md-3 card" style="background-color: #E2E2E2; font-size: 10px; border:none">
-                        <div class="card-body">
-                            <div>기획 000</div>
-                            <div>디자인 000</div>
-                            <div>프론트 김은재, 박서현</div>
-                            <div>백 김서연, 양희정</div>
+                    <div class="col-md-5 card" style="background-color: #E2E2E2; font-size: 10px; border:none">
+                        <div class="card-body" style="white-space: normal;">
+                            <div><strong>Product Manager</strong> 양희정</div>
+                            <div><strong>Design</strong> 김서연, 김은재, 박서현, 양희정</div>
+                            <div><strong>Frontend</strong> 김은재, 박서현</div>
+                            <div><strong>Backend</strong> 김서연, 양희정</div>
                         </div>
                     </div>
                     <div class="col-md-3 card" style="background-color: #E2E2E2; font-size: 10px; border:none">
                         <div class="card-body">
                             <div>About Us</div>
+                            <div>
+                                <a href="https://github.com/23InternetProgramming/TPHub_official" target="_blank"
+                                   class="social-icon"><i class="fab fa-github"></i></a>
+                                <a href="https://www.instagram.com/?next=%2F" target="_blank"
+                                   class="social-icon"><i class="fab fa-instagram"></i></a>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-3 card" style="background-color: #E2E2E2; font-size: 10px; border:none">
-                    </div>
+
                 </div>
             </div>
-
-            <div class="col-md-3"></div>
-        </div>
-
-        <div class="row">
-            <div class="text-center pt-3" style="font-size: 10px;">
-               ⓒ Copyright 2023. TPHubCompany. Inc. all right reserverd
+            <div class="col-md-3 card" style="background-color: #E2E2E2; font-size: 10px; border:none">
             </div>
         </div>
     </div>
+
+    <div class="col-md-3"></div>
+
+
+    <div class="row">
+        <div class="text-center pt-3" style="font-size: 10px;">
+            ⓒ Copyright 2023. TPHubCompany. Inc. all right reserverd
+        </div>
+    </div>
+
 </footer>

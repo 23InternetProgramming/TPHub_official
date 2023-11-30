@@ -15,6 +15,9 @@ class Category(models.Model):
     def get_absolute_url(self):
         return f'/board/category/{self.slug}'
 
+    def get_queryset(self):
+        return self.post_set.order_by('-pk')
+
 # User 모델을
 # Subclassing (하위 클래스화): 기존 User 모델을 상속하고 새로운 필드를 추가하는 방법입니다.
 # 방법으로 전화번호, 학번, 프로필 이미지 등 새로운 필드 넣기
@@ -37,9 +40,9 @@ class Post(models.Model):
         truncated_content = self.content[:10] + '...' if len(self.content) > 10 else self.content
         return f'[{self.pk}] | {self.category} | {self.author}) {self.title} : {truncated_content}'
 
-    def change_ordering(self):
-        self.ordering = 'pk' if self.ordering_state else '-pk'
-        self.ordering_state = not self.ordering_state
+    # def change_ordering(self):
+    #     self.ordering = 'pk' if self.ordering_state else '-pk'
+    #     self.ordering_state = not self.ordering_state
 
     def get_absolute_url(self):
         return f'/board/{self.pk}/'

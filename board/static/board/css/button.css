@@ -1,0 +1,12 @@
+/* button.css */
+
+.custom-btn {
+    border: 1px solid #000000;
+    background-color: #f8f9fa;
+    color: #495057;
+    margin-right: 5px;
+ }
+
+.custom-btn:hover {
+    background-color: #d0006f;
+}
