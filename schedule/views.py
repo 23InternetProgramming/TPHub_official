@@ -91,7 +91,3 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('schedule:calendar'))
     return render(request, 'schedule/event.html', {'form': form})
-
-class PostList(ListView) :
-    model = Post
-    ordering = '-pk'
