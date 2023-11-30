@@ -1,40 +1,72 @@
-{% extends 'landing_page/base.html' %}
+{% extends 'landing_page/base.html' %} {% load static %}
 
 {% block left_area %}
-    <h7>전체일정</h7>
+<h7>전체일정</h7>
 {% endblock %}
 
 
 {% block main_area %}
-    <!-- 패들렛 임베디드 HTML 코드 !-->
-    <div class="padlet">
-        <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1); border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4">
-            <p style="padding:0;margin:0">
-                <iframe src="https://padlet.com/embed/5cjk43zd6dw6sjbd"
-                        frameborder="0"
-                        allow="camera;microphone;geolocation"
-                        style="width:800px;min-height:900px;display:block;padding:0;margin:0">
-                </iframe>
-            </p>
-            <div style="display:flex;align-items:center;justify-content:end;margin:0;height:28px">
-                <a href="https://padlet.com?ref=embed"
-                   style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none"
-                   target="_blank">
-                    <div style="display:flex;align-items:center;">
-                        <img src="https://padlet.net/embeds/made_with_padlet_2022.png"
-                             width="114" height="28"
-                             style="padding:0;margin:0;background:0 0;border:none;box-shadow:none"
-                             alt="Padlet으로 만듦">
-                    </div>
-                </a>
-            </div>
+<!-- 패들렛 임베디드 HTML 코드 !-->
+<div class="padlet">
+    {% if user.is_authenticated %}
+    <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1); border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4">
+        <p style="padding:0;margin:0">
+            <iframe src="https://padlet.com/embed/5cjk43zd6dw6sjbd"
+                    frameborder="0"
+                    allow="camera;microphone;geolocation"
+                    style="width:800px;min-height:900px;display:block;padding:0;margin:0">
+            </iframe>
+        </p>
+        <div style="display:flex;align-items:center;justify-content:end;margin:0;height:28px">
+            <a href="https://padlet.com?ref=embed"
+               style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none"
+               target="_blank">
+                <div style="display:flex;align-items:center;">
+                    <img src="https://padlet.net/embeds/made_with_padlet_2022.png"
+                         width="114" height="28"
+                         style="padding:0;margin:0;background:0 0;border:none;box-shadow:none"
+                         alt="Padlet으로 만듦">
+                </div>
+            </a>
         </div>
     </div>
-{% endblock %}
+
+    {% else %}
+    <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1); border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4">
+        <p style="padding:0;margin:0">
+            <iframe src="https://padlet.com/embed/xr9pfv2o32pz2qeu"
+                    frameborder="0"
+                    allow="camera;microphone;geolocation"
+                    style="width:800px;min-height:900px;display:block;padding:0;margin:0">
+            </iframe>
+        </p>
+        <div style="display:flex;align-items:center;justify-content:end;margin:0;height:28px">
+            <a href="https://padlet.com?ref=embed"
+               style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none"
+               target="_blank">
+                <div style="display:flex;align-items:center;">
+                    <img src="https://padlet.net/embeds/made_with_padlet_2022.png"
+                         width="114" height="28"
+                         style="padding:0;margin:0;background:0 0;border:none;box-shadow:none"
+                         alt="Padlet으로 만듦">
+                </div>
+            </a>
+        </div>
+    </div>
 
 
 
-{% block right_area %}
+    {% endif %}
+</div>
+    {% endblock %}
 
-{% endblock %}
+
+
+    {% block right_area %}
+    <div class="card my-4 mx-0">
+        <h5>여기에 프로필</h5>
+        <div class="card-body">
+        </div>
+    </div>
+    {% endblock %}
 
