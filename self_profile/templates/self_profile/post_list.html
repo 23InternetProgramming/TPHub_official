@@ -5,7 +5,6 @@
 
 <div class="self_profile">
     <div class="row well">
-
         <div class="col-md-15">
             <div class="panel" style="height: 250px;">
                 <img class="rounded-circle border border-0 border-white shadow"
@@ -24,40 +23,31 @@
             </div>
             <br><h3 class="text-dark mx-4">프로필</h3><br>
             <div class="row mx-3">
-                <!-- left column -->
-                <!--            <div class="col-md-3">-->
-                <!--                <div class="text-center">-->
-                <!--                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="avatar img-circle img-thumbnail" alt="avatar">-->
 
-                <!--                    <input type="file" class="form-control">-->
-                <!--                </div>-->
-                <!--            </div>-->
-
-                <!-- edit form column -->
                 <div class="col-md-9 personal-info">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" id="profileForm" onsubmit="return showSaveConfirmation()">
                         <div class="row">
-                            <label class="col-lg-3 control-label">이름</label>
+                            <label class="col-lg-3 control-label">이름<sup>*</sup></label>
                             <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='10'>
+                                <input id="name" class="form-control short-input" type="text" value="" maxlength='10' required>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-lg-3 control-label">학번</label>
+                            <label class="col-lg-3 control-label">학번<sup>*</sup></label>
                             <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='8'>
+                                <input id="student_id" class="form-control short-input" type="text" value="" maxlength='8' required>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-lg-3 control-label">학과</label>
+                            <label class="col-lg-3 control-label">학과<sup>*</sup></label>
                             <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='8'>
+                                <input id="department" class="form-control short-input" type="text" value="" maxlength='8' required>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-lg-3 control-label">이메일</label>
+                            <label class="col-lg-3 control-label">이메일<sup>*</sup></label>
                             <div class="col-lg-8">
-                                <input class="box mail-input" id="domain-txt" type="text"/>@
+                                <input id="email" class="box mail-input" id="domain-txt" type="text" required/>@
                                 <select class="box" id="domain-list">
                                     <option value="type">직접 입력</option>
                                     <option value="naver.com">naver.com</option>
@@ -69,31 +59,44 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-lg-3 control-label">전화번호</label>
+                            <label class="col-lg-3 control-label">전화번호<sup>*</sup></label>
                             <div class="col-lg-8">
-                                <input class="num-input" type='tel' name='phone1' maxlength='3'/>-
-                                <input class="num-input" name='phone2' maxlength='4'/>-
-                                <input class="num-input" name='phone3' maxlength='4'/>
+                                <input id="phone1" class="num-input" type='tel' name='phone1' maxlength='3' required/>-
+                                <input id="phone2" class="num-input" name='phone2' maxlength='4' required/>-
+                                <input id="phone3" class="num-input" name='phone3' maxlength='4' required/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-lg-3 control-label">포지션</label>
+                            <div class="col-lg-8">
+                                <input id="role" class="form-control link-input" type="text" value="">
                             </div>
                         </div>
                         <div class="row">
                             <label class="col-lg-3 control-label">Git</label>
                             <div class="col-lg-8">
-                                <input class="form-control link-input" type="text" value="">
+                                <input id="git" class="form-control link-input" type="text" value="">
                             </div>
                         </div>
                         <div class="row">
                             <label class="col-lg-3 control-label">인스타그램</label>
                             <div class="col-lg-8">
-                                <input class="form-control link-input" type="text" value="">
+                                <input id="instagram" class="form-control link-input" type="text" value="">
                             </div>
                         </div>
-                        <div class="row ">
+                        <div class="row">
                             <label class="col-lg-3 control-label">페이스북</label>
                             <div class="col-lg-8">
-                                <input class="form-control link-input" type="text" value="">
+                                <input id="facebook" class="form-control link-input" type="text" value="">
                             </div>
-                        </div><br><hr><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-3 ml-1">
+                                <button type="button" class="btn btn-primary" onclick="toggleEditMode();">수정하기</button>
+                            </div>
+                        </div>
+                        <br><hr><br>
+
                     </form>
                 </div>
 
@@ -129,4 +132,47 @@
         </div>
     </div>
 </div>
+<script>
+    function showSaveConfirmation() {
+        return window.confirm("수정된 내용을 저장하시겠습니까?");
+    }
+
+    function toggleEditMode() {
+    // 수정 버튼을 눌렀을 때 호출되는 함수
+    var form = document.getElementById('profileForm');
+    var inputs = form.querySelectorAll('input, select');
+
+    // 입력 폼을 읽기 전용에서 편집 가능한 상태로 전환
+    inputs.forEach(function(input) {
+        input.removeAttribute('readonly');
+    });
+
+    // 확인 버튼 추가 및 수정 버튼 비활성화
+    var saveButton = document.createElement('button');
+    saveButton.type = 'button';
+    saveButton.className = 'btn btn-success';
+    saveButton.innerText = '저장하기';
+    saveButton.onclick = function() {
+        if (showSaveConfirmation()) {
+            saveProfile();
+            // 저장 후 다시 읽기 전용으로 전환
+            inputs.forEach(function(input) {
+                input.setAttribute('readonly', 'readonly');
+            });
+            // 수정 버튼 다시 활성화
+            editButton.disabled = false;
+        }
+    };
+
+    var editButton = document.querySelector('.btn.btn-primary');
+    editButton.parentNode.replaceChild(saveButton, editButton);
+
+    // 수정 버튼 비활성화
+    editButton.disabled = true;
+}
+</script>
+
+
 {% endblock %}
+
+
