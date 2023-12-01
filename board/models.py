@@ -1,7 +1,7 @@
-from account.models import CustomUser
-import os
-from django.conf import settings
 from django.db import models
+from django.contrib.auth.models import User
+import os
+from account.models import CustomUser
 
 
 class Category(models.Model):
@@ -15,6 +15,9 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return f'/board/category/{self.slug}'
+
+    def get_queryset(self):
+        return self.post_set.order_by('-pk')
 
 
 # User 모델을
@@ -39,9 +42,9 @@ class Post(models.Model):
         truncated_content = self.content[:10] + '...' if len(self.content) > 10 else self.content
         return f'[{self.pk}] | {self.category} | {self.author}) {self.title} : {truncated_content}'
 
-    def change_ordering(self):
-        self.ordering = 'pk' if self.ordering_state else '-pk'
-        self.ordering_state = not self.ordering_state
+    # def change_ordering(self):
+    #     self.ordering = 'pk' if self.ordering_state else '-pk'
+    #     self.ordering_state = not self.ordering_state
 
     def get_absolute_url(self):
         return f'/board/{self.pk}/'

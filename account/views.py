@@ -2,9 +2,10 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 from member.models import Post
 from self_profile.models import Post
+from account.forms import UserForm
+
 
 @login_required
 def base(request):

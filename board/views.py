@@ -76,17 +76,17 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class PostList(ListView):
     model = Post
-    ordering = '-pk'
+    ordering = '-created_at'
     ordering_state = True
-
-    def change_ordering(self):
-        self.ordering = 'pk' if self.ordering_state else '-pk'
-        self.ordering_state = not self.ordering_state
 
     def get_context_data(self, **kwargs):
         context = super(PostList, self).get_context_data()
         context['categories'] = Category.objects.all()
         return context
+
+    def get_queryset(self):
+        order = self.request.GET.get('ordering', '-created_at')
+        return Post.objects.all().order_by(order)
 
 
 class PostDetail(LoginRequiredMixin, DetailView):

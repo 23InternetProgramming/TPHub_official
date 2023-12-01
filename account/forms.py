@@ -11,3 +11,11 @@ class SignUpForm(UserCreationForm):
 
 class LoginForm(AuthenticationForm):
     pass
+
+
+class UserForm(UserCreationForm):
+    email = forms.EmailField(label="이메일")
+
+    class Meta:
+        model = User
+        fields = ("username", "password1", "password2", "email")
