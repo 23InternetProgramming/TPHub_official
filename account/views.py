@@ -1,44 +1,43 @@
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from django.contrib import auth
-from django.contrib.auth.models import User
-from .models import Account
-from django.contrib.auth import authenticate
-from .models import Selfprofile
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from member.models import Post
+from self_profile.models import Post
+
+@login_required
+def base(request):
+    if request.method == 'POST':
+        # 회원가입 시에 입력한 정보를 member 앱과 self_profile 앱의 post_list에 저장하는 코드 작성
+        student_id = request.POST['student_id']
+        major = request.POST['major']
+        post = Post(student_id=student_id, major=major)
+        post.save()
+        post_list = Post(user=request.user, post=post)
+        post_list.save()
+    return render(request, 'landing_page/base.html')
 
 
-# Create your views here.
 def signup(request):
-    if request.method == "POST":
-        if request.POST["1st_password"] == request.POST["2nd_password"]:
-            user = User.objects.create_user(username=request.POST["username"],
-                                            password=request.POST["1st_password"],
-                                            email=request.POST["email"],
-                                            schoolid=request.POST["schoolid"],
-                                            major=request.POST["major"])
-            profile = Selfprofile(user=user)#signup 함수에서 user등록 시 Selfprofile과 엮어주기
-            profile.save()
-            auth.login(request, user)
-            return redirect('landing_page/base.html')
-        return render(request, 'signup.html')
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('landing_page:base')
     else:
-        return render(request, 'signup.html')
+        form = UserCreationForm()
+    return render(request, 'account/signup.html', {'form': form})
 
 
 def login(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate(request, username=username, password=password)
-
+        user = authenticate(request, username=username, password=password)
         if user is not None:
-            auth.login(request, user)
-            return redirect('landing_page/base.html')
+            login(request, user)
+            return redirect('landing_page:base')
         else:
-            return render(request, 'login.html', {'error': 'username or password is incorrect'})
-    else:
-        return render(request, 'login.html')
-
-
-def logout(request):
-    auth.logout(request)
-    return redirect('landing_page/base.html')
+            return redirect('account:login')
+    return render(request, 'account/login.html')

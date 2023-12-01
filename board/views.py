@@ -16,6 +16,7 @@ def delete_comment(request, pk):
     else:
         raise PermissionDenied
 
+
 def new_comment(request, pk):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, pk=pk)

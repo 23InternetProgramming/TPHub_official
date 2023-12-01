@@ -25,12 +25,15 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
+                           <a href="{% url 'account:signup' %}">회원가입</a>
+                            <a href="{% url 'account:login' %}">로그인</a>
+                            <a href="{% url 'account:logout' %}">로그아웃</a>
                             <button type="button" class="btn btn-outline-primary btn-block btn-sm"><i class="fa-brands fa-google"></i> Log in with Google</button>
-                            <button type="button" class="btn btn-outline-secondary btn-block btn-sm"><i class="fa-regular fa-envelope"></i> Sign up with E-mail</button>
+                            <button type="button" class="btn btn-outline-secondary btn-block btn-sm" onclick="window.location.href='{% url 'signup' %}'"><i class="fa-regular fa-envelope"></i> Sign up with E-mail</button>
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-outline-success btn-block btn-sm"><i class="fa-solid fa-n"></i> Log in with Naver</button>
-                            <button type="button" class="btn btn-outline-secondary btn-block btn-sm"><i class="fa-regular fa-envelope"></i> Log in with E-mail</button>
+                            <button type="button" class="btn btn-outline-secondary btn-block btn-sm"><a href="{% url 'login' %}"><i class="fa-regular fa-envelope"></i>Log in with E-mail</a></button>
                         </div>
                     </div>
                 </div>
