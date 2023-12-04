@@ -6,16 +6,22 @@
     </content>
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
     <orderEntry type="inheritedJdk" />
 =======
 <<<<<<< HEAD
+>>>>>>> main
     <orderEntry type="jdk" jdkName="Python 3.12 (test)" jdkType="Python SDK" />
 =======
     <orderEntry type="jdk" jdkName="Python 3.11 (TPHub_official)" jdkType="Python SDK" />
 >>>>>>> main
+<<<<<<< HEAD
+=======
 >>>>>>> main
 =======
     <orderEntry type="jdk" jdkName="Python 3.11 (TPHub_official)" jdkType="Python SDK" />
+>>>>>>> main
 >>>>>>> main
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
