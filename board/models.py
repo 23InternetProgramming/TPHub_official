@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 import os
-from account.models import CustomUser
 
 
 class Category(models.Model):
@@ -28,7 +27,7 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=30)
     # 현재 로그인된 유저를 자동으로 가져와야 함
-    author = models.ForeignKey(CustomUser, null=True, blank=False, on_delete=models.SET_NULL)
+    author = models.ForeignKey(User, null=True, blank=False, on_delete=models.SET_NULL)
     category = models.ForeignKey(Category, null=True, blank=False, on_delete=models.SET_NULL)
 
     content = models.TextField()
@@ -58,7 +57,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

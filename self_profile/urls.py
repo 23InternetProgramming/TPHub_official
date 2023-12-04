@@ -1,12 +1,12 @@
 from django.urls import path
 from . import views
 from django.urls import path
-from .views import profile
+from .views import save_profile
 
 app_name = 'self_profile'
 
 urlpatterns = [
-    path('profile/', profile, name='profile'),
-    path('', views.PostList.as_view())
+    path('', views.PostList.as_view()),
+    path('save_profile/', save_profile, name='save_profile'),
 
 ]

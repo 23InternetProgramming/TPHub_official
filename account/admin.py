@@ -1,13 +1,11 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import CustomUser
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 
 
-class UserAdmin(BaseUserAdmin):
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
-    list_filter = ('is_staff', 'is_superuser', 'is_active')
-    ordering = ('email',)  # 원하는 필드로 변경
+class CustomUserAdmin(UserAdmin):
+    list_display = ('username', 'first_name', 'last_name', 'email', 'is_staff', 'is_active')
 
 
-# Register the modified UserAdmin
-admin.site.register(CustomUser, UserAdmin)
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
