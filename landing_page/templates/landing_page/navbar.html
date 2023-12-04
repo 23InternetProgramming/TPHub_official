@@ -112,7 +112,6 @@ cursor: pointer;
             </div>
 
 
-
             <!-- 우측 로그인 영역 -->
             <div class="navbar_login_menu">
                 {% if user.is_authenticated %}
@@ -126,7 +125,7 @@ cursor: pointer;
                             <li class="dropdownBar_menuItem__setE1">
                                 <a href="/self_profile" style="display: inline-block;">내 계정</a></li>
                             <li class="dropdownBar_menuItem__setE1">
-                                <a href="#" onclick="logoutAndRedirect();" style="display: inline-block;">로그아웃</a>
+                                <a href="{% url 'account:logout' %}" onclick="logoutAndRedirect();" style="display: inline-block;">로그아웃</a>
                             </li>
                         </ul>
                     </div>
@@ -136,6 +135,7 @@ cursor: pointer;
                 <ul class="navbar-nav ml-auto">
                     <a href="/account/login/">로그인</a> /
                     <a href="/account/signup/">회원가입</a>
+
                 </ul>
             </div>
             {% endif %}

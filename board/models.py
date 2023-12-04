@@ -18,6 +18,7 @@ class Category(models.Model):
     def get_queryset(self):
         return self.post_set.order_by('-pk')
 
+
 # User 모델을
 # Subclassing (하위 클래스화): 기존 User 모델을 상속하고 새로운 필드를 추가하는 방법입니다.
 # 방법으로 전화번호, 학번, 프로필 이미지 등 새로운 필드 넣기
@@ -59,7 +60,8 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    #slug =
+
+    # slug =
 
     def __str__(self):
         return f'{self.author}::{self.content}'

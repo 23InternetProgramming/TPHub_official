@@ -176,6 +176,15 @@
         <div class="col-md-2" id="right-area">
             <!-- 우측 박스 -->
             {% block right_area %}
+            {% if user.is_authenticated %}
+    <!-- 로그인된 상태에서 보여질 내용 -->
+    <p>로그인된 상태입니다.</p>
+    <a href="{% url 'accounts:logout' %}">로그아웃</a>
+{% else %}
+    <!-- 로그인되지 않은 상태에서 보여질 내용 -->
+    <a href="{% url 'account:signup' %}">회원가입</a>
+    <a href="{% url 'account:login' %}">로그인</a>
+{% endif %}
             {% endblock %}
         </div>
     </div>
