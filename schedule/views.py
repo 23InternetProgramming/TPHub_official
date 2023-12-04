@@ -17,17 +17,18 @@ def index(request) :
 
 def create_todo(request):
     user_input_str = request.POST['todoContent']
-    new_todo = Todo(content=user_input_str)
     # author이 자동으로 채워지도록 코드 추가
+    author = request.user
+    new_todo = Todo(content=user_input_str, author=author)
     new_todo.save()
-    return HttpResponseRedirect(reverse('schedule:index'))
+    return HttpResponseRedirect(reverse('schedule:calendar'))
 
 def deleteTodo(request):
     delete_todo_id = request.GET['todoNum']
     print('삭제한 todo의 id', delete_todo_id)
     todo = Todo.objects.get(id = delete_todo_id)
     todo.delete()
-    return HttpResponseRedirect(reverse('schedule:index'))
+    return HttpResponseRedirect(reverse('schedule:calendar'))
 
 class EventDeleteView(generic.DeleteView):
     model = Event
@@ -62,6 +63,10 @@ class CalendarView(generic.ListView):
 
         # Pass today's date to the template
         context['today'] = today
+
+        # Get todos and pass them to the template
+        todos = Todo.objects.all()
+        context['todos'] = todos
 
         return context
 

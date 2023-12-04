@@ -3,7 +3,7 @@
 <div class="container">
         <div class="header">
             <div class="page-header">
-                <h4>개인일정 <small>Todo List</small></h4>
+                <h4><small>{{ user }}</small>의 Todo List </h4>
             </div>
         </div>
         <div class="content">
@@ -19,21 +19,27 @@
                 </form>
             </div>
 
+            {% if user.is_authenticated %}
             <div class="toDoDiv">
                 <ul class="list-group">
                     {% for todo in todos %}
-                    <form action="./deleteTodo" method="GET">
-                        <div class="input-group">
-                            <li class="list-group-item">{{ todo.content }}</li>
-                            <input type="hidden" id="todoNum" name="todoNum" value="{{ todo.id }}">
-                            <span class="input-group-addon">
-                                <button type="submit" class="custom-btn btn btn-black">완료</button>
-                            </span>
-                        </div>
-                    </form>
+                        {% if todo.author == user %}
+                        <form action="./deleteTodo" method="GET">
+                            <div class="input-group">
+                                <li class="list-group-item">{{ todo.content }}</li>
+                                <input type="hidden" id="todoNum" name="todoNum" value="{{ todo.id }}">
+                                <span class="input-group-addon">
+                                    <button type="submit" class="custom-btn btn btn-black">완료</button>
+                                </span>
+                            </div>
+                        </form>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>
+            {% else %}
+                <p> 로그인이 필요합니다 </p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
