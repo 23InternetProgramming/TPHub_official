@@ -1,9 +1,9 @@
-
 {% block personal_schedule %}
+
 <div class="container">
         <div class="header">
             <div class="page-header">
-                <h1>To-do List <small>with Django</small></h1>
+                <h4>개인일정 <small>Todo List</small></h4>
             </div>
         </div>
         <div class="content">
@@ -11,9 +11,9 @@
                 <form action="./createTodo" method="POST">
                     {% csrf_token %}
                     <div class="input-group">
-                        <input id="todoContent" name="todoContent" type="text" class="form-control" placeholder="메모할 내용을 적어주세요">
+                        <input id="todoContent" name="todoContent" type="text" class="form-control" placeholder="개인일정 추가하기">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit">메모하기!</button>
+                            <button class="btn btn-default" type="submit">추가</button>
                         </span>
                     </div>
                 </form>
@@ -22,8 +22,8 @@
             <div class="toDoDiv">
                 <ul class="list-group">
                     {% for todo in todos %}
-                    <form action="" method="GET">
-                        <div class="input-group" name='todo1'>
+                    <form action="./deleteTodo" method="GET">
+                        <div class="input-group">
                             <li class="list-group-item">{{ todo.content }}</li>
                             <input type="hidden" id="todoNum" name="todoNum" value="{{ todo.id }}">
                             <span class="input-group-addon">

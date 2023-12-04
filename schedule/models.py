@@ -10,9 +10,13 @@ class Event(models.Model):
 
     @property
     def get_html_url(self):
-        url = reverse('schedule:event_edit', args=(self.id,))
+        url = reverse('schedule:event_edit', args=(self.pk,))
         return f'<a href="{url}"> {self.title} </a>'
 
 class Todo(models.Model):
     content = models.CharField(max_length=255)
     author = models.ForeignKey(User, null=True, blank=False, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f'[{self.pk}] | {self.author}) {self.content[:10]}'
+

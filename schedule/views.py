@@ -2,8 +2,7 @@ from calendar import calendar
 import calendar
 from datetime import datetime, date, timedelta
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 from django.views import generic
 from django.utils.safestring import mark_safe
 
@@ -13,21 +12,27 @@ from .utils import Calendar
 
 def index(request) :
     todos = Todo.objects.all()
-    print("From DB: ", todos)
     content = {'todos' : todos}
-    return render(request, "schedule/index.html", content)
+    return render(request, "schedule/base.html", content)
 
-def createTodo(request):
+def create_todo(request):
     user_input_str = request.POST['todoContent']
     new_todo = Todo(content=user_input_str)
     # author이 자동으로 채워지도록 코드 추가
     new_todo.save()
-    return HttpResponseRedirect(reverse('index'))
+    return HttpResponseRedirect(reverse('schedule:index'))
+
+def deleteTodo(request):
+    delete_todo_id = request.GET['todoNum']
+    print('삭제한 todo의 id', delete_todo_id)
+    todo = Todo.objects.get(id = delete_todo_id)
+    todo.delete()
+    return HttpResponseRedirect(reverse('schedule:index'))
 
 class EventDeleteView(generic.DeleteView):
     model = Event
     template_name = 'schedule/event_confirm_delete.html'
-    success_url = '/schedule/' #reverse_lazy('schedule:calendar')
+    success_url = '/schedule/'
 
 class CalendarView(generic.ListView):
     model = Event
