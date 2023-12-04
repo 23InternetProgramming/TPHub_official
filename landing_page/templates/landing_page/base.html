@@ -3,6 +3,7 @@
 
 <html>
 <head>
+
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'landing_page/images/TPHub_logo_one.png' %}">
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -12,7 +13,11 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
     <style>
+
 
         @font-face {
         font-family: 'Pretendard-Regular';
@@ -26,7 +31,6 @@
         font-weight: 800;
         font-style: normal;
     }
-
 
     body {
         font-family: 'Pretendard-Regular', sans-serif; /* 폰트 적용 */
@@ -171,6 +175,7 @@
                 {% block left_area %}
                 {% endblock %}
             </div>
+
             <div class="container mt-3">
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
@@ -202,6 +207,7 @@
                     </a>
                 </div>
             </div>
+
         </div>
 
         <div class="col-md-7" id="main-area">
@@ -217,6 +223,17 @@
         <div class="col-md-2" id="right-area">
             <!-- 우측 박스 -->
             {% block right_area %}
+
+            {% if user.is_authenticated %}
+            <!-- 로그인된 상태에서 보여질 내용 -->
+            <p>로그인된 상태입니다.</p>
+            <a href="{% url 'accounts:logout' %}">로그아웃</a>
+            {% else %}
+            <!-- 로그인되지 않은 상태에서 보여질 내용 -->
+            <a href="{% url 'account:signup' %}">회원가입</a>
+            <a href="{% url 'account:login' %}">로그인</a>
+            {% endif %}
+
             {% endblock %}
         </div>
     </div>
