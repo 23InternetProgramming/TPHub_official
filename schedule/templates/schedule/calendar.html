@@ -2,10 +2,10 @@
 
 {% block calendar_area %}
     <div class="clearfix">
-        <a class="btn btn-dark left" href="{{ prev_month_url }}"> Previous Month </a>
-        <a class="btn btn-secondary left" style="margin-left: 10px" href="{% url 'schedule:calendar' %}?month={{ today.year }}-{{ today.month }}">Today</a>
-        <a class="btn btn-dark right" href="{{ next_month_url }}"> Next Month </a>
-        <a class="btn btn-secondary right" style="margin-right: 10px"  href="{% url 'schedule:event_new' %}">Add Event</a>
+        <a class="btn btn-dark left" href="{{ prev_month_url }}"> 이전 달 </a>
+        <a class="btn btn-secondary left" style="margin-left: 10px" href="{% url 'schedule:calendar' %}?month={{ today.year }}-{{ today.month }}"> 오늘 </a>
+        <a class="btn btn-dark right" href="{{ next_month_url }}"> 다음 달 </a>
+        <a class="btn btn-secondary right" style="margin-right: 10px"  href="{% url 'schedule:event_new' %}"> 일정 추가하기 </a>
     </div>
     {{ calendar }}
 {% endblock %}
