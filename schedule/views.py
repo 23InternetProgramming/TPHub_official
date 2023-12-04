@@ -11,11 +11,13 @@ from .forms import EventForm
 from .models import *
 from .utils import Calendar
 
+
 def index(request):
     todos = Todo.objects.all()
     print("From DB: ", todos)
     content = {'todos': todos}
     return render(request, "schedule/index.html", content)
+
 
 def createTodo(request):
     user_input_str = request.POST['todoContent']
@@ -24,10 +26,12 @@ def createTodo(request):
     new_todo.save()
     return HttpResponseRedirect(reverse('index'))
 
+
 class EventDeleteView(generic.DeleteView):
     model = Event
     template_name = 'schedule/event_confirm_delete.html'
-    success_url = '/schedule/' #reverse_lazy('schedule:calendar')
+    success_url = '/schedule/'  # reverse_lazy('schedule:calendar')
+
 
 class CalendarView(generic.ListView):
     model = Event
@@ -38,7 +42,7 @@ class CalendarView(generic.ListView):
 
         # use today's date for the calendar
         today = datetime.today().date()
-        d = get_date(self.request.GET.get('month', str(today.year) + '-' + str(today.month))) ## ('day', None)
+        d = get_date(self.request.GET.get('month', str(today.year) + '-' + str(today.month)))  ## ('day', None)
 
         # Instantiate our calendar class with today's year and date
         schedule = Calendar(d.year, d.month)
@@ -60,11 +64,13 @@ class CalendarView(generic.ListView):
 
         return context
 
+
 def prev_month(d):
     first = d.replace(day=1)
     prev_month = first - timedelta(days=1)
     month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
     return month
+
 
 def next_month(d):
     days_in_month = calendar.monthrange(d.year, d.month)[1]
@@ -73,11 +79,13 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+
 def get_date(req_day):
     if req_day:
         year, month = (int(x) for x in req_day.split('-'))
         return date(year, month, day=1)
     return datetime.today()
+
 
 def event(request, event_id=None):
     instance = Event()
