@@ -5,6 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <orderEntry type="inheritedJdk" />
 =======
 <<<<<<< HEAD
@@ -12,6 +13,9 @@
 =======
     <orderEntry type="jdk" jdkName="Python 3.11 (TPHub_official)" jdkType="Python SDK" />
 >>>>>>> main
+>>>>>>> main
+=======
+    <orderEntry type="jdk" jdkName="Python 3.11 (TPHub_official)" jdkType="Python SDK" />
 >>>>>>> main
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

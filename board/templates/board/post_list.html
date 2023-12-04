@@ -5,12 +5,20 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'board/css/button.css' %}">
+    <style>
+    .btn-light.text-dark {
+        background-color: #e0e0e0; /* 차분한 배경색으로 변경 */
+        border-radius: 0;
+    }
+</style>
+
 </head>
 
 <div class="container">
     <div class="row">
         <div class="col-md-7">
-            <div class="btn-group" style="margin-bottom: 10px; ">
+
+            <div class="btn-group" style="margin-bottom: 2px; ">
                 <button type="button" class="btn btn-sm btn-light text-dark" onclick="sortByDate('-created_at')">최신순</button>
                 <button type="button" class="btn btn-sm btn-light text-dark" onclick="sortByDate('created_at')">오래된순</button>
 
