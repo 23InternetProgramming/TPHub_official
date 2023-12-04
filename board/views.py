@@ -6,6 +6,7 @@ from .models import Post, Category, Comment
 from .forms import CommentForm
 from django.core.exceptions import PermissionDenied
 
+
 def delete_comment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     post = comment.post
@@ -14,6 +15,7 @@ def delete_comment(request, pk):
         return redirect(post.get_absolute_url())
     else:
         raise PermissionDenied
+
 
 def new_comment(request, pk):
     if request.user.is_authenticated:
@@ -31,6 +33,7 @@ def new_comment(request, pk):
             return redirect(post.get_absolute_url())
     else:
         raise PermissionDenied
+
 
 class PostDelete(LoginRequiredMixin, DeleteView):
     model = Post
@@ -54,6 +57,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
         else:
             raise PermissionDenied
 
+
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
     fields = ['category', 'title', 'content', 'file_upload']
@@ -69,7 +73,8 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         else:
             return redirect('/board/')
 
-class PostList(ListView) :
+
+class PostList(ListView):
     model = Post
     ordering = '-created_at'
     ordering_state = True
@@ -82,6 +87,7 @@ class PostList(ListView) :
     def get_queryset(self):
         order = self.request.GET.get('ordering', '-created_at')
         return Post.objects.all().order_by(order)
+
 
 class PostDetail(LoginRequiredMixin, DetailView):
     model = Post
@@ -99,20 +105,22 @@ class PostDetail(LoginRequiredMixin, DetailView):
         else:
             return False
 
+
 class CategoryList(ListView):
     model = Category
     ordering = ['name']
+
 
 def category_post(request, slug):
     category = Category.objects.get(slug=slug)
     post_list = Post.objects.filter(category=category)
 
-    return render (
+    return render(
         request,
         'board/post_list.html',
         {
-            'post_list' : post_list,
-            'categories' : Category.objects.all(),
-            'category' : category,
+            'post_list': post_list,
+            'categories': Category.objects.all(),
+            'category': category,
         }
     )

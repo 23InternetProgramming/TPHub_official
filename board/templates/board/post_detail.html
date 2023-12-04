@@ -6,6 +6,7 @@
 
 <link href="{% static 'blog/bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="{% static 'board/css/comment.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'board/css/del.css' %}">
 <script src="https://kit.fontawesome.com/a1066371f8.js" crossorigin="anonymous"></script>
 
 <!-- Page content-->
@@ -18,7 +19,8 @@
                 <!-- 작성자 프로필 사진 및 정보 -->
                 <div class="d-flex align-items-center">
                     <!-- 작성자 프로필 사진 (원 모양) -->
-                    <img src="{{ post.author.profile_picture.url }}" alt="{{ post.author.username }}'s profile picture" class="rounded-circle" height="40" width="40">
+                    <img src="{{ post.author.profile_picture.url }}" alt="{{ post.author.username }}'s profile picture"
+                         class="rounded-circle" height="40" width="40">
                     <div class="ms-2">
                         <!-- 작성자 이름 -->
                         <div>{{ post.author.username }}</div>
@@ -31,7 +33,8 @@
                 {% if user.is_authenticated and user == post.author %}
                 <div class>
                     <a class="btn btn-outline-dark" href="/board/update_post/{{ post.pk }}" role="button">Edit Post</a>
-                    <a class="btn btn-outline-dark" href="/board/delete_post/{{ post.pk }}" role="button">Delete Post</a>
+                    <a class="btn btn-outline-dark" href="/board/delete_post/{{ post.pk }}" role="button">Delete
+                        Post</a>
                 </div>
                 {% endif %}
             </div>
@@ -68,25 +71,29 @@
 
         <div id="comment-area">
             <!-- Comments Form -->
-            <div class="card my-4">
+            <div class="my-4">
+                <h5 class="card-header"> 댓글을 남겨주세요. </h5>
                 <div class="card-body">
                     <div class="comment-header">
                         {% if post.comment_set.exists %}
-                                <p>댓글 ({{ post.comment_set.count }})</p>
-                            {% else %}
-                                <p>댓글 (0)</p>
-                            {% endif %}
+                        <p>댓글 ({{ post.comment_set.count }})</p>
+                        {% else %}
+                        {% endif %}
                     </div>
+
                     {% if user.is_authenticated %}
-                        <form id="comment-form" method="POST" action="{{ post.get_absolute_url }}new_comment/">
-                            {% csrf_token %}
-                            <div class="form-group comment-form">
-                                {{ comment_form | crispy }}
+                    <form id="comment-form" method="POST" action="{{ post.get_absolute_url }}new_comment/">
+                        {% csrf_token %}
+                        <div class="form-group comment-form">
+                            <div>
+                                <textarea name="content" cols="40" rows="3" class="textarea form-control" required=""
+                                          id="id_content" style="height: 100px;"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style=" margin-top: 10px;">Submit</button>
+                    </form>
                     {% else %}
-                        <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#" data-toggle="modal"
+                    <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#" data-toggle="modal"
                        data-target="#loginModal">
                         Log in and leave a comment
                     </a>
@@ -96,71 +103,73 @@
 
             {% if post.comment_set.exists %}
             {% for comment in post.comment_set.iterator %}
-                <!-- Single Comment -->
-                <div class="media mb-4" id="comment-{{ comment.pk }}">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                    <div class="media-body">
-                        {% if user.is_authenticated and comment.author == user %}
-                            <div class="float-right">
-                                <a role="button"
-                                   href="#"
-                                   id="comment-{{ comment.pk }}-delete-modal-btn"
-                                   class="btn btn-sm btn-danger"
-                                   data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}">
-                                    delete
-                                </a>
-                            </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="deleteCommentModal-{{ comment.pk }}" tabindex="-1"
-                                 role="dialog" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteModalLabel">
-                                                정말 해당 댓글을 삭제하시겠습니까?
-                                            </h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <del>{{ comment | linebreaks }}</del>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <a role="button" class="btn btn-danger" href="/board/delete_comment/{{ comment.pk }}/">Delete</a>
-                                        </div>
-                                    </div>
+            <!-- Single Comment -->
+            <div class="media mb-4" id="comment-{{ comment.pk }}">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                    {% if user.is_authenticated and comment.author == user %}
+                    <div class="float-right">
+                        <a role="button"
+                           href="#"
+                           id="comment-{{ comment.pk }}-delete-modal-btn"
+                           class="btn btn-sm btn-danger"
+                           data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}">
+                            delete
+                        </a>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteCommentModal-{{ comment.pk }}" tabindex="-1"
+                         role="dialog" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">
+                                        정말 해당 댓글을 삭제하시겠습니까?
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <del>{{ comment | linebreaks }}</del>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <a role="button" class="btn btn-danger"
+                                       href="/board/delete_comment/{{ comment.pk }}/">Delete</a>
                                 </div>
                             </div>
-                        {% endif %}
-                            <h5 class="mt-0">{{ comment.author.username }} &nbsp;&nbsp;<small class="text-muted">{{ comment.created_at }}</small></h5>
-                            <p>{{ comment.content | linebreaks }}</p>
+                        </div>
                     </div>
+                    {% endif %}
+                    <h5 class="mt-0">{{ comment.author.username }}</h5>
+                        <small class="text-muted">{{ comment.created_at|date:"Y년 m월 d일 H:i:s" }}</small>
+                    <p>{{ comment.content | linebreaks }}</p>
                 </div>
+            </div>
             {% endfor %}
             {% endif %}
         </div>
     </div>
 
     <div class="col-lg-4">
-    <!-- Categories Widget -->
+        <!-- Categories Widget -->
         <div class="card my-4">
             <div class="card-body">
                 <p>"{{ post.category }}"의 다른 게시물</p>
                 {% for category in categories %}
-                    {% if category == post.category %}
-                        <ul class="list-unstyled mb-0">
-                            {% for c in category.get_queryset|slice:":3" %}
-                            <li>
-                                <a href="{{ c.get_absolute_url }}">
-                                    {{ c.title|slice:":10" }}{% if c.title|length > 10 %}...{% endif %}
-                                </a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        <a href="{{ category.get_absolute_url }}">더보기</a>
-                    {% endif %}
+                {% if category == post.category %}
+                <ul class="list-unstyled mb-0">
+                    {% for c in category.get_queryset|slice:":3" %}
+                    <li>
+                        <a href="{{ c.get_absolute_url }}">
+                            {{ c.title|slice:":10" }}{% if c.title|length > 10 %}...{% endif %}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <a href="{{ category.get_absolute_url }}">더보기</a>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

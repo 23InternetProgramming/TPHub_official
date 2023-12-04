@@ -3,8 +3,22 @@
 
 <html>
 <head>
-     <link rel="shortcut icon" type="image/x-icon" href="{% static 'landing_page/images/TPHub_logo_one.png' %}">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'landing_page/images/TPHub_logo_one.png' %}">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
     <style>
+
+
         @font-face {
         font-family: 'Pretendard-Regular';
         src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -161,6 +175,39 @@
                 {% block left_area %}
                 {% endblock %}
             </div>
+
+            <div class="container mt-3">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+                    <!-- The slideshow -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <a href="https://github.com/" target="_blank">
+                                <img src="{% static 'landing_page/images/slide1.png' %}" alt="Git" >
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://lms.duksung.ac.kr/login.php" target="_blank">
+                                <img src="{% static 'landing_page/images/slide2.png' %}" alt="eClass" width="800" height="180">
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://sso.duksung.ac.kr/svc/tk/Auth.do?ac=Y&ifa=N&id=portal&" target="_blank">
+                                <img src="{% static 'landing_page/images/slide3.png' %}" alt="Portal" width="800" height="180">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
+            </div>
+
         </div>
 
         <div class="col-md-7" id="main-area">
@@ -176,6 +223,17 @@
         <div class="col-md-2" id="right-area">
             <!-- 우측 박스 -->
             {% block right_area %}
+
+            {% if user.is_authenticated %}
+            <!-- 로그인된 상태에서 보여질 내용 -->
+            <p>로그인된 상태입니다.</p>
+            <a href="{% url 'accounts:logout' %}">로그아웃</a>
+            {% else %}
+            <!-- 로그인되지 않은 상태에서 보여질 내용 -->
+            <a href="{% url 'account:signup' %}">회원가입</a>
+            <a href="{% url 'account:login' %}">로그인</a>
+            {% endif %}
+
             {% endblock %}
         </div>
     </div>

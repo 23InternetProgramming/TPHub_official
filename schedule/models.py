@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
+
 class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -12,6 +13,7 @@ class Event(models.Model):
     def get_html_url(self):
         url = reverse('schedule:event_edit', args=(self.pk,))
         return f'<a href="{url}"> {self.title} </a>'
+
 
 class Todo(models.Model):
     content = models.CharField(max_length=255)

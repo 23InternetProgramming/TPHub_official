@@ -2,6 +2,13 @@
 <project version="4">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (InterPro)" project-jdk-type="Python SDK" />
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> main
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (test)" />
   </component>
@@ -11,6 +18,13 @@
 >>>>>>> main
 =======
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (TPHub_official)" project-jdk-type="Python SDK" />
+>>>>>>> main
+<<<<<<< HEAD
+=======
+>>>>>>> main
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (TPHub_official)" project-jdk-type="Python SDK" />
+>>>>>>> main
 >>>>>>> main
   <component name="PyCharmProfessionalAdvertiser">
     <option name="shown" value="true" />

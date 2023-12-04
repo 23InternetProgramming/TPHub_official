@@ -10,7 +10,7 @@ from .forms import EventForm
 from .models import *
 from .utils import Calendar
 
-def index(request) :
+def index(request):
     todos = Todo.objects.all()
     content = {'todos' : todos}
     return render(request, "schedule/base.html", content)
@@ -101,4 +101,3 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('schedule:calendar'))
     return render(request, 'schedule/event.html', {'form': form})
-
