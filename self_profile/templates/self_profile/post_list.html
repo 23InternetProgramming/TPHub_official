@@ -16,11 +16,7 @@
         </div>
 
         <div class="container bootstrap snippets bootdey">
-            <div class="alert alert-info alert-dismissable">
-                <a class="panel-close close" data-dismiss="alert">×</a>
-                <i class="fa fa-coffee"></i>
-                공지사항 기능 <strong> 입니다</strong>.
-            </div>
+
             <br><h3 class="text-dark mx-4">프로필</h3><br>
             <div class="row mx-3">
 
@@ -91,7 +87,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-8 offset-lg-3 ml-1">
+                            <div class="col-lg-9"></div> <!-- 비어있는 9개의 컬럼 -->
+                            <div class="col-lg-3 text-right">
                                 <button type="button" class="btn btn-primary" onclick="toggleEditMode();">수정하기</button>
                             </div>
                         </div>
@@ -125,6 +122,13 @@
                                 <input class="form-control short-input" type="text" value="" maxlength='10'>
                             </div><br><br>
                         </div>
+                       <div class="row">
+                <div class="col-lg-9"></div> <!-- 비어있는 9개의 컬럼 -->
+                <div class="col-lg-3 text-right">
+                    <button type="button" class="btn btn-primary ml-auto" onclick="toggleEditMode();">수정하기</button>
+                </div>
+            </div>
+
                     </form>
                 </div>
             </div>
