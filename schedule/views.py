@@ -11,10 +11,10 @@ from .forms import EventForm
 from .models import *
 from .utils import Calendar
 
-def index(request) :
+def index(request):
     todos = Todo.objects.all()
     print("From DB: ", todos)
-    content = {'todos' : todos}
+    content = {'todos': todos}
     return render(request, "schedule/index.html", content)
 
 def createTodo(request):
