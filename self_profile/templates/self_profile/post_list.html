@@ -18,45 +18,38 @@
                 </div>
             </div>
         </div>
-            <div class="container bootstrap snippets bootdey">
-                <div class="alert alert-info alert-dismissable">
-                    <a class="panel-close close" data-dismiss="alert">×</a>
-                    <i class="fa fa-coffee"></i>
-                    공지사항 기능 <strong>입니다</strong>.
-                </div>
-                <br>
-                <h3 class="text-dark mx-4">프로필</h3>
-                <br>
-                <div class="row mx-3">
-                    <div class="col-md-9 personal-info">
-                        <form class="form-horizontal" role="form" id="profileForm" onsubmit="return showSaveConfirmation()">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <div class="row">
-                                <label class="col-lg-3 control-label">사용자 이름</label>
+        <div class="container bootstrap snippets bootdey">
+            <br>
+            <h3 class="text-dark mx-4">프로필</h3>
+            <br>
+            <div class="row mx-3">
+                <div class="col-md-9 personal-info">
+                    <form class="form-horizontal" role="form" id="profileForm" onsubmit="return showSaveConfirmation()">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="row">
+                            <label class="col-lg-3 control-label">사용자 이름</label>
                             <div class="col-lg-8">
                                 <input id="username" class="form-control short-input" type="text" value="{{ user.username }}" readonly>
                             </div>
                         </div>
-                            <div class="row">
-                                <label class="col-lg-3 control-label">학번<sup>*</sup></label>
-                                <div class="col-lg-8">
-                                    <input id="student_id" class="form-control short-input" type="text" value="{{ user.student_id }}" maxlength='8' required readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label class="col-lg-3 control-label">학과<sup>*</sup></label>
-                                <div class="col-lg-8">
-                                    <input id="major" class="form-control short-input" type="text" value="{{ user.major }}" maxlength='8' required readonly>
-                                </div>
-                            </div>
                         <div class="row">
-                            <div class="row">
-                                <label class="col-lg-3 control-label">이메일</label>
+                            <label class="col-lg-3 control-label">학번<sup>*</sup></label>
                             <div class="col-lg-8">
-                                 <input id="email" class="form-control short-input" type="email" value="{{ user.email }}" readonly>
+                                <input id="student_id" class="form-control short-input" type="text" value="{{ user.student_id }}" maxlength='8' required readonly>
                             </div>
                         </div>
+                        <div class="row">
+                            <label class="col-lg-3 control-label">학과<sup>*</sup></label>
+                            <div class="col-lg-8">
+                                <input id="major" class="form-control short-input" type="text" value="{{ user.major }}" maxlength='8' required readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-lg-3 control-label">이메일</label>
+                            <div class="col-lg-8">
+                                <input id="email" class="form-control short-input" type="email" value="{{ user.email }}" readonly>
+                            </div>
                         </div>
                         <div class="row">
                             <label class="col-lg-3 control-label">전화번호<sup>*</sup></label>
@@ -92,7 +85,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-8 offset-lg-3 ml-1">
-                                <button type="submit" class="btn btn-primary" onclick="toggleEditMode();">수정하기</button>
+                                <button type="button" class="btn btn-primary" onclick="toggleEditMode();">수정하기</button>
                             </div>
                         </div>
                         <br><hr><br>
@@ -131,102 +124,99 @@
     </div>
 </div>
 <script>
-function toggleEditMode() {
-    var form = document.getElementById('profileForm');
-    var inputs = form.querySelectorAll('input, select');
+    function toggleEditMode() {
+        var form = document.getElementById('profileForm');
+        var inputs = form.querySelectorAll('input, select');
 
-    // 입력 폼을 읽기 전용에서 편집 가능한 상태로 전환
-    inputs.forEach(function(input) {
-        input.removeAttribute('readonly');
-    });
+        // 입력 폼을 읽기 전용에서 편집 가능한 상태로 전환
+        inputs.forEach(function(input) {
+            input.removeAttribute('readonly');
+        });
 
-    var editButton = document.getElementById('editButton');
-    var saveButton = document.createElement('button');
-    saveButton.type = 'button';
-    saveButton.className = 'btn btn-success';
-    saveButton.innerText = '저장하기';
-    saveButton.onclick = function() {
-        if (showSaveConfirmation()) {
-            // 저장 후 다시 읽기 전용으로 전환
+        var editButton = document.getElementById('editButton');
+        var saveButton = document.createElement('button');
+        saveButton.type = 'button';
+        saveButton.className = 'btn btn-success';
+        saveButton.innerText = '저장하기';
+        saveButton.onclick = function() {
+            if (showSaveConfirmation()) {
+                // 저장 후 다시 읽기 전용으로 전환
+                inputs.forEach(function(input) {
+                    input.setAttribute('readonly', 'readonly');
+                });
+                // 수정 버튼 다시 활성화
+                editButton.disabled = false;
+                // 확인 버튼을 수정 버튼으로 다시 변경
+                form.appendChild(editButton);
+                form.removeChild(saveButton);
+
+                // 저장 로직 추가
+                saveData();
+            }
+        };
+
+        editButton.disabled = true;
+
+        // 수정하기 버튼을 저장하기 버튼으로 변경
+        form.appendChild(saveButton);
+        form.removeChild(editButton);
+    }
+
+    function saveData() {
+        // 입력된 정보를 가져옵니다.
+        var username = document.getElementById('username').value;
+        var studentId = document.getElementById('student_id').value;
+        var major = document.getElementById('major').value;
+        var email = document.getElementById('email').value;
+
+        // 서버에 데이터를 저장하는 요청을 보냅니다.
+        fetch('/save_profile', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                username: username,
+                student_id: studentId,
+                major: major,
+                email: email
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('프로필이 성공적으로 저장되었습니다.');
+            // 저장된 정보를 읽기 전용으로 변경
+            var form = document.getElementById('profileForm');
+            var inputs = form.querySelectorAll('input, select');
             inputs.forEach(function(input) {
                 input.setAttribute('readonly', 'readonly');
             });
-            // 수정 버튼 다시 활성화
+            // 수정하기 버튼 활성화
+            var editButton = document.getElementById('editButton');
             editButton.disabled = false;
-            // 확인 버튼을 수정 버튼으로 다시 변경
+            // 저장하기 버튼을 수정하기 버튼으로 변경
             form.appendChild(editButton);
             form.removeChild(saveButton);
-
-            // 저장 로직 추가
-            saveData();
-        }
-    };
-
-    editButton.disabled = true;
-
-    // 수정하기 버튼을 저장하기 버튼으로 변경
-    form.appendChild(saveButton);
-    form.removeChild(editButton);
-}
-
-function saveData() {
-    // 입력된 정보를 가져옵니다.
-    var name = document.getElementById('name').value;
-    var studentId = document.getElementById('student_id').value;
-    var major = document.getElementById('major').value;
-    var username = document.getElementById('username').value;
-    var email = document.getElementById('email').value;
-
-    // 서버에 데이터를 저장하는 요청을 보냅니다.
-    fetch('/save_profile', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
-        body: JSON.stringify({
-            name: name,
-            student_id: studentId,
-            major: major,
-            username: username,
-            email: email
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert('프로필이 성공적으로 저장되었습니다.');
-        // 저장된 정보를 읽기 전용으로 변경
-        var form = document.getElementById('profileForm');
-        var inputs = form.querySelectorAll('input, select');
-        inputs.forEach(function(input) {
-            input.setAttribute('readonly', 'readonly');
+        .catch(error => {
+            console.error('Error:', error);
+            alert('프로필 저장 중 오류가 발생했습니다.');
         });
-        // 수정하기 버튼 활성화
-        var editButton = document.getElementById('editButton');
-        editButton.disabled = false;
-        // 저장하기 버튼을 수정하기 버튼으로 변경
-        form.appendChild(editButton);
-        form.removeChild(saveButton);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('프로필 저장 중 오류가 발생했습니다.');
-    });
-}
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+    }
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
         }
+        return cookieValue;
     }
-    return cookieValue;
-}
 </script>
 {% endblock %}
-
