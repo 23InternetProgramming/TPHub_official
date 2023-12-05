@@ -1,17 +1,7 @@
-* {
+cal-base {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-}
-
-body {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-    color: #000000;
-    -webkit-font-smoothing: antialiased;
 }
 
 input,
@@ -32,7 +22,7 @@ textarea {
     align-items: center;
     border: none;
     background: #fff;
-    color: #262626;
+    color: #ADBC00;
     border-radius: 10px;
     height: 50px;
     font-weight: 600;
@@ -45,7 +35,7 @@ textarea {
 
 .btn:hover {
     color: #FFF;
-    background: #455AF7;
+    background: #ADBC00;
 }
 
 .btn-small {
@@ -81,7 +71,7 @@ textarea {
     content: '';
     width: 40px;
     height: 40px;
-    background: #455AF7;
+    background: #ADBC00;
     border-radius: 10px;
     z-index: -1;
 }
@@ -95,24 +85,16 @@ textarea {
     margin: 0px 10px 0 0;
 }
 
-.title {
-    font-size: 1.3em;
-}
-
-.subtitle {
-    font-size: 1.1em;
-}
-
 /* Calendar */
 
-.container {
+.cal-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+/*    flex-direction: column;
+    justify-content: center;*/
     align-items: center;
     width: 100%;
-    min-height: 100vh;
-    background: #ecf1f8;
+/*    min-height: 100vh;*/
+    background: none;
 }
 
 .calendar-assets {
@@ -162,10 +144,10 @@ textarea {
 }
 
 .calendar {
-    height: 370px;
-    width: 324px;
+/*    height: 370px;*/
+    width: 100%;
     border-radius: 18px;
-    background: #ffffff;
+    background: #F1F1F1;
 	  padding: 10px;
 	  user-select: none;
 }
@@ -178,19 +160,19 @@ textarea {
     padding: 15px;
     height: 50px;
     width: 100%;
-    color: #262626;
+    color: #ADBC00;
 }
 
 .month {
-    font-size: 0.7em;
+/*    font-size: 0.3em;*/
 }
 
 .icon {
     padding: 10px;
     font-size: 1em;
     margin: 0 0 0 5px;
-    background: #ffffff;
-    color: #455af7;
+    background: #F1F1F1;
+    color: #ADBC00;
     border: none;
     cursor: pointer;
     outline: 0;
@@ -208,8 +190,8 @@ textarea {
     font-size: 1em;
     color: gray;
     font-weight: 400;
-    width: 40px;
-    margin: 10px 0;
+/*    width: 40px;
+    margin: 10px 0;*/
 }
 
 #calendar tr {
@@ -218,13 +200,13 @@ textarea {
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    margin: 3px;
+/*    margin: 3px;*/
 }
 
 #calendar td {
     display: flex;
     height: 40px;
-    width: 40px;
+/*    width: 40px;*/
     justify-content: center;
     align-items: center;
     text-align: center;

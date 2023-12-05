@@ -1,4 +1,5 @@
 {% extends 'self_profile/base.html' %}
+{% load static %}
 
 {% block main_area %}
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -9,7 +10,7 @@
             <div class="panel" style="height: 250px;">
                 <img class="rounded-circle border border-0 border-white shadow" alt="..."
                      src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
-                          {% else %}http://placehold.it/30x30
+                          {% else %}{% static 'landing_page/images/user.png' %}
                           {% endif %}"
                      style="width 40%; height: 40%; margin-top: 135px; margin-left: 20px;">
                 <form class="form-horizontal" role="form" id="profileForm" onsubmit="return showSaveConfirmation()" method="post" enctype="multipart/form-data">
