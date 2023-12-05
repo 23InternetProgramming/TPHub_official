@@ -35,9 +35,8 @@
                 <!-- 딜리트, 에딧 버튼 -->
                 {% if user.is_authenticated and user == post.author %}
                 <div class>
-                    <a class="btn btn-outline-dark" href="/board/update_post/{{ post.pk }}" role="button">Edit Post</a>
-                    <a class="btn btn-outline-dark" href="/board/delete_post/{{ post.pk }}" role="button">Delete
-                        Post</a>
+                    <a class="btn btn-outline-dark" href="/board/update_post/{{ post.pk }}" role="button">글 수정하기</a>
+                    <a class="btn btn-outline-dark" href="/board/delete_post/{{ post.pk }}" role="button">글 삭제하기</a>
                 </div>
                 {% endif %}
             </div>
@@ -89,12 +88,15 @@
                         {% csrf_token %}
                         <div class="form-group comment-form">
                             <div>
-                                <textarea name="content" cols="40" rows="3" class="textarea form-control" required=""
-                                          id="id_content" style="height: 100px;"></textarea>
+            <textarea name="content" cols="40" rows="3" class="textarea form-control" required=""
+                      id="id_content" style="height: 100px;"></textarea>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" style=" margin-top: 10px;">Submit</button>
+                        <div style="text-align: right;">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Submit</button>
+                        </div>
                     </form>
+
                     {% else %}
                     <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#" data-toggle="modal"
                        data-target="#loginModal">
@@ -108,21 +110,24 @@
             {% for comment in post.comment_set.iterator %}
             <!-- Single Comment -->
             <div class="media mb-4" id="comment-{{ comment.pk }}">
-                <img class="d-flex mr-3 rounded-circle" alt=""
-                     src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
-                          {% else %}http://placehold.it/50x50
-                          {% endif %}">
                 <div class="media-body">
+                    <img class="d-flex mr-3 rounded-circle" alt=""
+                         src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
+                              {% else %}http://placehold.it/50x50
+                              {% endif %}">
                     {% if user.is_authenticated and comment.author == user %}
-                    <div class="float-right">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mt-0">{{ comment.author.username }}</h6>
                         <a role="button"
                            href="#"
                            id="comment-{{ comment.pk }}-delete-modal-btn"
                            class="btn btn-sm btn-danger"
                            data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}">
-                            delete
+                            댓글 삭제
                         </a>
                     </div>
+
+
                     <!-- Modal -->
                     <div class="modal fade" id="deleteCommentModal-{{ comment.pk }}" tabindex="-1"
                          role="dialog" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
@@ -148,8 +153,7 @@
                         </div>
                     </div>
                     {% endif %}
-                    <h5 class="mt-0">{{ comment.author.username }}</h5>
-                        <small class="text-muted">{{ comment.created_at|date:"Y년 m월 d일 H:i:s" }}</small>
+                    <small class="text-muted">{{ comment.created_at|date:"Y년 m월 d일 H:i:s" }}</small>
                     <p>{{ comment.content | linebreaks }}</p>
                 </div>
             </div>
@@ -174,7 +178,10 @@
                     </li>
                     {% endfor %}
                 </ul>
-                <a href="{{ category.get_absolute_url }}">더보기</a>
+                <a href="{{ category.get_absolute_url }}" style="text-align: right; display: block;">
+                    더보기
+                </a>
+
                 {% endif %}
                 {% endfor %}
             </div>
@@ -182,5 +189,4 @@
     </div>
 
 </div>
-
-{% endblock %}
+    {% endblock %}
