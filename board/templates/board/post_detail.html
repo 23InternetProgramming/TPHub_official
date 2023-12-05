@@ -19,7 +19,10 @@
                 <!-- 작성자 프로필 사진 및 정보 -->
                 <div class="d-flex align-items-center">
                     <!-- 작성자 프로필 사진 (원 모양) -->
-                    <img src="{{ post.author.profile_picture.url }}" alt="{{ post.author.username }}'s profile picture"
+                    <img src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
+                              {% else %}http://placehold.it/40x40
+                              {% endif %}"
+                         alt="{{ post.author.username }}'s profile picture"
                          class="rounded-circle" height="40" width="40">
                     <div class="ms-2">
                         <!-- 작성자 이름 -->
@@ -108,7 +111,10 @@
             <!-- Single Comment -->
             <div class="media mb-4" id="comment-{{ comment.pk }}">
                 <div class="media-body">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <img class="d-flex mr-3 rounded-circle" alt=""
+                         src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
+                              {% else %}http://placehold.it/50x50
+                              {% endif %}">
                     {% if user.is_authenticated and comment.author == user %}
                     <div class="d-flex justify-content-between align-items-center">
                         <h6 class="mt-0">{{ comment.author.username }}</h6>

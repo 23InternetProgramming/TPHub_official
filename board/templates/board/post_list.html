@@ -57,13 +57,13 @@
     </div>
     <hr>
 
-    {% if post_list.exists %}
+    {% if user.is_authenticated and post_list.exists %}
     {% for p in post_list %}
     <a class="centered-element" href="{{ p.get_absolute_url }}" style="text-decoration: none; color:black;">
         <div class="row mb-2">
             <!-- 게시물 제목 / 작성자 / 카테고리 -->
             <div class="col-md-6">
-                <div class="row mb-2">{{ p.title }}</div>
+                <div class="row mb-2">{{ p.title|truncatewords:20 }}</div>
                 <div class="row mb-2">{{ p.author }} ⦁ {{ p.category }}</div>
             </div>
             <!-- 댓글수 -->
@@ -79,8 +79,11 @@
             </div>
             <!-- 작성자 프로필 사진 / 작성일자 및 시간 -->
             <div class="col-md-4 text-right">
-                <img src="{{ p.author.profile_picture.url }}" alt="" style="background:green"
-                     class="rounded-circle" height="30" width="30">
+                <img alt="" src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
+                                  {% else %}http://placehold.it/30x30
+                                  {% endif %}"
+                     style="width:30px; height:30px; border-radius: 50%; object-fit: cover"
+                >
                 <span style="font-size: 0.7em;">{{ p.created_at }}</span>
             </div>
         </div>
@@ -90,7 +93,11 @@
     {% endif %}
     {% endfor %}
     {% else %}
-        <h3>아직 게시물이 없습니다.</h3>
+        {% if not user.is_authenticated %}
+            <h3>로그인이 필요합니다.</h3>
+        {% else %}
+            <h3>아직 게시물이 없습니다.</h3>
+        {% endif %}
     {% endif %}
 </div>
 {% endblock %}

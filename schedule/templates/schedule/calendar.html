@@ -5,8 +5,34 @@
         <a class="btn btn-dark left" href="{{ prev_month_url }}"> 이전 달 </a>
         <a class="btn btn-secondary left" style="margin-left: 10px" href="{% url 'schedule:calendar' %}?month={{ today.year }}-{{ today.month }}"> 오늘 </a>
         <a class="btn btn-dark right" href="{{ next_month_url }}"> 다음 달 </a>
+        {% if user.is_authenticated %}
         <a class="btn btn-secondary right" style="margin-right: 10px"  href="{% url 'schedule:event_new' %}"> 일정 추가하기 </a>
+        {% else %}
+        <a class="btn btn-secondary right" style="margin-right: 10px"  href="#" data-toggle="modal" data-target="#loginModal"> 일정 추가하기 </a>
+        {% endif %}
     </div>
     {{ calendar }}
+
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="logInModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logInModalLabel"><i class="fa-solid fa-arrow-right-from-bracket"></i>알림</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <!-- boot5에 적용해야한다 함 data-bs-dismiss 이거 2개 -->
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <p>로그인이 필요합니다.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
