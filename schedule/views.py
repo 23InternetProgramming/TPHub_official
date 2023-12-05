@@ -13,12 +13,11 @@ from .utils import Calendar
 
 def index(request):
     todos = Todo.objects.all()
-    content = {'todos' : todos}
+    content = {'todos': todos}
     return render(request, "schedule/base.html", content)
 
 
 def create_todo(request):
-
     user_input_str = request.POST['todoContent']
     # author이 자동으로 채워지도록 코드 추가
     author = request.user
@@ -26,10 +25,11 @@ def create_todo(request):
     new_todo.save()
     return HttpResponseRedirect(reverse('schedule:calendar'))
 
+
 def deleteTodo(request):
     delete_todo_id = request.GET['todoNum']
     print('삭제한 todo의 id', delete_todo_id)
-    todo = Todo.objects.get(id = delete_todo_id)
+    todo = Todo.objects.get(id=delete_todo_id)
     todo.delete()
     return HttpResponseRedirect(reverse('schedule:calendar'))
 
@@ -38,6 +38,7 @@ class EventDeleteView(generic.DeleteView):
     model = Event
     template_name = 'schedule/event_confirm_delete.html'
     success_url = '/schedule/'
+
 
 class CalendarView(generic.ListView):
     model = Event

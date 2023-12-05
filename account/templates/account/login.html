@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 {% load static %}
 
 <html>
@@ -93,14 +90,38 @@ background: #ff9900 none repeat scroll 0 0;
 
 
 <body id="LoginForm">
->>>>>>> main
 <div class="container">
-    <h1>Login</h1>
+  <br><br>
+  <div class="login-form">
+    <div class="main-div">
 
-    <form method="POST" action="{% url 'account:login' %}">
+      <div class="panel">
+        <h2>
+          <a href="http://127.0.0.1:8000/">
+            <img class="account_logo" src="{% static 'landing_page/images/TPHub_logo.png' %}" alt="logo">
+          </a>
+        </h2>
+        <p>회원이 아니신가요? <a href="/account/signup"><b>회원가입</b></a></p>
+      </div>
+
+
+      <form method="POST" action="{% url 'account:login' %}">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <button type="submit">Login</button>
-    </form>
+        <div class="form-group">
+<input type="text"  class="form-control" name="username" placeholder="Username">        </div>
+
+        <div class="form-group">
+<input type="password"  class="form-control" name="password" placeholder="Password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">로그인</button>
+      </form>
+    </div>
+
+  </div>
 </div>
+
+
+
+</body>
+</html>
