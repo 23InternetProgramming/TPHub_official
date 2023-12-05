@@ -43,7 +43,7 @@
     </div>
     <hr>
 
-    {% if post_list.exists %}
+    {% if user.is_authenticated and post_list.exists %}
     {% for p in post_list %}
     <a class="centered-element" href="{{ p.get_absolute_url }}" style="text-decoration: none; color:black;">
         <div class="row mb-2">
@@ -76,7 +76,11 @@
     {% endif %}
     {% endfor %}
     {% else %}
-        <h3>아직 게시물이 없습니다.</h3>
+        {% if not user.is_authenticated %}
+            <h3>로그인이 필요합니다.</h3>
+        {% else %}
+            <h3>아직 게시물이 없습니다.</h3>
+        {% endif %}
     {% endif %}
 </div>
 {% endblock %}
