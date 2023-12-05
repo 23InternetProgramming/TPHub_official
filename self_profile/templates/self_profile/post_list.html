@@ -7,8 +7,10 @@
     <div class="row well">
         <div class="col-md-15">
             <div class="panel" style="height: 250px;">
-                <img class="rounded-circle border border-0 border-white shadow"
-                     src="https://avatars.githubusercontent.com/u/145529622?v=4" alt="..."
+                <img class="rounded-circle border border-0 border-white shadow" alt="..."
+                     src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
+                          {% else %}http://placehold.it/30x30
+                          {% endif %}"
                      style="width 40%; height: 40%; margin-top: 135px; margin-left: 20px;">
                 <div class="name ml-3" style="position: absolute; top: 170px; left: 15px; font-size:2.5rem;">
                     <small>{{ user_profile.name }}</small>

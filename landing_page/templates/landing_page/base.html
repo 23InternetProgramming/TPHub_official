@@ -146,7 +146,6 @@
     <title>TPHub</title>
 
     <link rel="stylesheet" href="{% static 'landing_page/bootstrap/bootstrap.min.css' %}" media="screen">
-    <link rel="stylesheet" href="{% static 'landing_page/css/base.css' %}" media="screen">
 
     <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
     <!-- jQuery 및 Bootstrap JavaScript 추가 -->
@@ -168,15 +167,15 @@
 {% include 'landing_page/navbar.html' %}
 
 <div class="container my-3">
-    <div class="row">
-        <div class="col-md-2 offset-md-0" id="left-area">
+    <div class="row" style="display:flex; justify-content:center;">
+        <div class="col-md-2 offset-md-0" style="display:flex; flex-Direction:column;" id="left-area">
             <!-- 좌측 박스 -->
             <div class="card my-4 mx-0">
                 {% block left_area %}
                 {% endblock %}
             </div>
 
-            <div class="container mt-3">
+            <div class="container" style="padding:0px;">
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
                     <!-- The slideshow -->
@@ -199,12 +198,12 @@
                     </div>
 
                     <!-- Left and right controls -->
-                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
+<!--                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">-->
+<!--                        <span class="carousel-control-prev-icon"></span>-->
+<!--                    </a>-->
+<!--                    <a class="carousel-control-next" href="#myCarousel" data-slide="next">-->
+<!--                        <span class="carousel-control-next-icon"></span>-->
+<!--                    </a>-->
                 </div>
             </div>
 
