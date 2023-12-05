@@ -1,18 +1,32 @@
 {% extends 'landing_page/base.html' %} {% load static %}
 
+
+<!---------------------------- 좌측 위젯!------------------------------------------->
 {% block left_area %}
-<h7>전체일정</h7>
+<div class="card my-4 mx-0" style=" background-color: #F1F1F1; border: none;">
+
+<div class="card-body" >
+
+
+
+        <h5 >
+            어서 오세요,
+        </h5>
+
+</div>
+</div>
 
 {% endblock %}
 
 
 
-
+<!---------------------------- 메인 위젯!------------------------------------------->
 {% block main_area %}
 <!-- 패들렛 임베디드 HTML 코드 !-->
 <div class="padlet">
     {% if user.is_authenticated %}
-    <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1); border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4">
+    <div class="padlet-embed" style="solid rgba(0,0,0,0.1); border-radius:5px;
+    box-sizing:border-box;overflow:hidden;position:relative;width:100%; background:#F4F4F4">
         <p style="padding:0;margin:0">
             <iframe src="https://padlet.com/embed/5cjk43zd6dw6sjbd"
                     frameborder="0"
@@ -64,11 +78,53 @@
     {% endblock %}
 
 
-
-    {% block right_area %}
-    <div class="card my-4 mx-0">
-        <h5>여기에 프로필</h5>
-        <div class="card-body">
+<!---------------------------- 우측 위젯!------------------------------------------->
+{% block right_area %}
+<div class="card my-4 mx-0" style="width: 280px; background-color: #F1F1F1; border: none;">
+    <div class="card-body">
+        {% if user.is_authenticated %}
+        <h5 style="bold; margin-top: -10px;">
+            <br>어서 오세요,
+            <br><strong>{{ user.user }}</strong> 님!</h5>
+        <div style="float: right; margin-left: 10px;">
+            <div class="profile_img" style="margin-top: -70px;">
+                <img class="rounded-circle border border-3 border-white shadow"
+                     src="{% static 'member/images/PSH.png' %}" alt="..."
+                     style="width 100px; height: 100px;">
+            </div>
         </div>
+        <h6><a href="{% url 'account:logout' %}" onclick="logoutAndRedirect();"
+           style="display: inline-block; color: #D0CFD6; bold;margin-top: 16px;">로그아웃</a></h6>
+        <hr>
+
+        <div class="musicbox">
+            <h6>오늘의 음악</h6>
+            <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/4FUoa4B7ObLkrSAjVKZpwj?utm_source=generator"
+                    width="250" height="152" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+            </iframe>
+        </div>
+
+
+        {% else %}
+        <a href="/account/login/">
+            <button type="submit" class="btn btn-primary">로그인하기</button>
+        </a>
+
+        {% endif %}
     </div>
-    {% endblock %}
+</div>
+
+
+<script>
+    function logoutAndRedirect() {
+      $.post("{% url 'account:logout' %}", function() {
+        // 로그아웃에 성공하면 현재 페이지로 리로드
+        location.reload();
+      });
+    }
+</script>
+
+{% endblock %}

@@ -25,7 +25,23 @@
         background-color: #FFFEF8 !important;
         margin-top: 20px;
         background: rgba(241, 246, 253);
+        overflow-x: hidden;
 
+    }
+
+body::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+    }
+
+body::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #E2E2E2; /* 스크롤바의 색상 */
+
+    border-radius: 10px;
+    }
+
+body::-webkit-scrollbar-track {
+    background: #ffffff;  /*스크롤바 뒷 배경 색상*/
     }
 
 
@@ -139,45 +155,11 @@
     <!-- NavBar -->
     {% include 'landing_page/navbar.html' %}
 
-    <!-- Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="logInModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="logInModalLabel"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log In</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <!-- boot5에 적용해야한다 함 data-bs-dismiss 이거 2개 -->
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-outline-primary btn-block btn-sm"><i class="fa-brands fa-google"></i> Log in with Google</button>
-                            <button type="button" class="btn btn-outline-secondary btn-block btn-sm"><i class="fa-regular fa-envelope"></i> Sign up with E-mail</button>
-                        </div>
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-outline-success btn-block btn-sm"><i class="fa-solid fa-n"></i> Log in with Naver</button>
-                            <button type="button" class="btn btn-outline-secondary btn-block btn-sm"><i class="fa-regular fa-envelope"></i> Log in with E-mail</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="container my-3">
         <div class="row">
-            <div class="col-md-3">
-                <!-- 좌측 박스 -->
-                <div class="card my-4">
-                    <h5 class="card-header">콘텐츠 1</h5>
-                    <div class="card-body">
-                    </div>
-                </div>
-            </div>
+
 
             <div class="col-md-6" id="main-area">
                 <div class="card my-4">
@@ -188,14 +170,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
-                <!-- 우측 박스 -->
-                <div class="card my-4">
-                    <h5 class="card-header">콘텐츠 3</h5>
-                    <div class="card-body">
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 

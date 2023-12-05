@@ -33,4 +33,3 @@ class ExtendedUserCreationForm(UserCreationForm):
             )
 
         return user
-
