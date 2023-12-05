@@ -7,6 +7,7 @@ from self_profile.models import UserProfile
 class ExtendedUserCreationForm(UserCreationForm):
     name = forms.CharField(max_length=30)
     email = forms.EmailField(required=True)
+    username = forms.CharField(max_length=30)
 
     class Meta:
         model = User
@@ -30,4 +31,6 @@ class ExtendedUserCreationForm(UserCreationForm):
                 instagram='',
                 facebook=''
             )
+
         return user
+
