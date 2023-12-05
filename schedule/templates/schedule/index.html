@@ -3,10 +3,16 @@
 <div class="container">
         <div class="header">
             <div class="page-header">
-                <h4><small>{{ user }}</small>의 Todo List </h4>
+                {% if user.is_authenticated %}
+                    <h4><small>{{ user }}</small>의 Todo List </h4>
+                {% else %}
+                    <h4>Todo List</h4>
+                    <p> 로그인이 필요합니다 </p>
+                {% endif %}
             </div>
         </div>
         <div class="content">
+            {% if user.is_authenticated %}
             <div class="messageDiv">
                 <form action="./createTodo" method="POST">
                     {% csrf_token %}
@@ -18,6 +24,7 @@
                     </div>
                 </form>
             </div>
+            {% endif %}
 
             {% if user.is_authenticated %}
             <div class="toDoDiv">
@@ -37,8 +44,6 @@
                     {% endfor %}
                 </ul>
             </div>
-            {% else %}
-                <p> 로그인이 필요합니다 </p>
             {% endif %}
         </div>
     </div>

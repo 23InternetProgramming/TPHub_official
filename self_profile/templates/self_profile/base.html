@@ -24,12 +24,29 @@ sup{
 
 
 body {
-    font-family: 'Pretendard-Regular', sans-serif; /* 폰트 적용 */
-    background-color: #FFFEF8 !important;
-    margin-top: 20px;
-    background: rgba(241, 246, 253);
+        font-family: 'Pretendard-Regular', sans-serif; /* 폰트 적용 */
+        background-color: #FFFEF8 !important;
+        margin-top: 20px;
+        background: rgba(241, 246, 253);
+        overflow-x: hidden;
 
-}
+    }
+
+body::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+    }
+
+body::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #E2E2E2; /* 스크롤바의 색상 */
+
+    border-radius: 10px;
+    }
+
+body::-webkit-scrollbar-track {
+    background: #ffffff;  /*스크롤바 뒷 배경 색상*/
+    }
+
 
 #main_area {
     background-color: #FFFEF8 !important;

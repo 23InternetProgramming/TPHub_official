@@ -85,43 +85,32 @@ background: #ff9900 none repeat scroll 0 0;
   <!------ Include the above in your HEAD tag ---------->
 
 
-</head>
-
-
-
+    </head>
     <body id="LoginForm">
-    <div class="container">
-      <br><br>
-      <div class="login-form">
-        <div class="main-div">
-
-          <div class="panel">
-            <h2>
-              <a href="http://127.0.0.1:8000/">
-                <img class="account_logo" src="{% static 'landing_page/images/TPHub_logo.png' %}" alt="logo">
-              </a>
-            </h2>
-            <p>회원이 아니신가요? <a href="/account/signup"><b>회원가입</b></a></p>
-          </div>
-
-
-          <form method="POST" action="{% url 'account:login' %}">
-            {% csrf_token %}
-            <div class="form-group">
-    <input type="text"  class="form-control" name="username" placeholder="Username">        </div>
-
-            <div class="form-group">
-    <input type="password"  class="form-control" name="password" placeholder="Password">
+            <div class="container">
+              <br><br>
+              <div class="login-form">
+                <div class="main-div">
+                  <div class="panel">
+                    <h2>
+                      <a href="http://127.0.0.1:8000/">
+                        <img class="account_logo" src="{% static 'landing_page/images/TPHub_logo.png' %}" alt="logo">
+                      </a>
+                    </h2>
+                    <p>회원이 아니신가요? <a href="/account/signup"><b>회원가입</b></a></p>
+                  </div>
+                  <form method="POST" action="{% url 'account:login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+            <input type="text"  class="form-control" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+            <input type="password"  class="form-control" name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                  </form>
+                </div>
+              </div>
             </div>
-
-            <button type="submit" class="btn btn-primary">로그인</button>
-          </form>
-        </div>
-
-      </div>
-    </div>
-
-
-
-</body>
+    </body>
 </html>

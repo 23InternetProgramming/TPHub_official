@@ -52,7 +52,7 @@ class CalendarView(generic.ListView):
         d = get_date(self.request.GET.get('month', str(today.year) + '-' + str(today.month)))  ## ('day', None)
 
         # Instantiate our calendar class with today's year and date
-        schedule = Calendar(d.year, d.month)
+        schedule = Calendar(d.year, d.month, user=self.request.user)
 
         # Call the formatmonth method, which returns our calendar as a table
         html_schedule = schedule.formatmonth(withyear=True)
