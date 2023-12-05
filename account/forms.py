@@ -30,4 +30,5 @@ class ExtendedUserCreationForm(UserCreationForm):
                 instagram='',
                 facebook=''
             )
+
         return user

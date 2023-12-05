@@ -6,16 +6,16 @@
 
 
   <style>
-  .account_logo {
+
+    .account_logo {
     width: 105px;
     height: 32px;
-    }
+}
 
     a, h2{
     text-decoration: none;
     color: black;
     }
-
 
     body#LoginForm{
     background-color: #D0CFD6;
@@ -24,8 +24,7 @@
     background-size:cover;
     padding:10px;}
 
-.form-heading
-{ color:#fff; font-size:23px;}
+.form-heading { color:#fff; font-size:23px;}
 .panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;}
 .panel p { color:#777777; font-size:14px; margin-bottom:30px; line-height:24px;}
 .login-form .form-control {
@@ -93,6 +92,7 @@ background: #ff9900 none repeat scroll 0 0;
 <body id="LoginForm">
 <div class="container">
   <br><br>
+
   <div class="login-form">
     <div class="main-div">
 
@@ -102,24 +102,25 @@ background: #ff9900 none repeat scroll 0 0;
             <img class="account_logo" src="{% static 'landing_page/images/TPHub_logo.png' %}" alt="logo">
           </a>
         </h2>
-        <p>회원이 아니신가요? <a href="/account/signup"><b>회원가입</b></a></p>
+        <p>이미 회원이신가요? <a href="{% url 'account:login' %}"><b>로그인</b></a></p>
       </div>
 
 
-      <form method="POST" action="{% url 'account:login' %}">
-        {% csrf_token %}
+      <form id="Login">
         <div class="form-group">
-<input type="text"  class="form-control" name="username" placeholder="아이디">        </div>
-
-        <div class="form-group">
-<input type="password"  class="form-control" name="password" placeholder="비밀번호">
+          <input type="email" class="form-control" id="inputEmail" placeholder="이메일">
         </div>
 
-        <button type="submit" class="btn btn-primary">로그인</button>
+        <div class="form-group">
+          <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호">
+        </div>
+
+        <button type="submit" class="btn btn-primary">회원가입</button>
       </form>
 
 
     </div>
+
 
   </div>
 </div>
