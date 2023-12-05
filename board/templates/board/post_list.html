@@ -5,12 +5,26 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'board/css/button.css' %}">
-    <style>
-    .btn-light.text-dark {
-        background-color: #e0e0e0; /* 차분한 배경색으로 변경 */
-        border-radius: 0;
-    }
-</style>
+     <style>
+        .btn-group {
+            margin-bottom: 2px;
+            gap: 3px; /* 원하는 간격으로 조절할 수 있습니다. */
+            border-radius: 2;
+        }
+
+        .btn-group button {
+            background-color: transparent; /* 배경색을 투명하게 설정합니다. */
+            border: 1px solid #000; /* 버튼 테두리 스타일을 적용할 수 있습니다. */
+             border-radius: 0;
+             transition: background-color 0.3s; color 0.3s; /* 배경색 변화에 애니메이션을 추가합니다. */
+        }
+
+        .btn-group button:hover {
+            background-color: #000; /* 마우스 호버 시 배경색을 검정으로 설정합니다. */
+            color: #fff;
+        }
+
+    </style>
 
 </head>
 
@@ -18,9 +32,9 @@
     <div class="row">
         <div class="col-md-7">
 
-            <div class="btn-group" style="margin-bottom: 2px; ">
-                <button type="button" class="btn btn-sm btn-light text-dark" onclick="sortByDate('-created_at')">최신순</button>
-                <button type="button" class="btn btn-sm btn-light text-dark" onclick="sortByDate('created_at')">오래된순</button>
+            <div class="btn-group" style="margin-bottom: 2px;">
+                <button type="button" class="btn btn-sm btn-light" onclick="sortByDate('-created_at')">최신순</button>
+                <button type="button" class="btn btn-sm btn-light" onclick="sortByDate('created_at')">오래된순</button>
 
                 <script>
                     function sortByDate(order) {

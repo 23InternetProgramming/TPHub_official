@@ -129,7 +129,6 @@ padding: 1rem;
                                 <a href="/self_profile" style="display: inline-block; margin-left: -45px;">내 계정</a></li>
                             <li class="dropdownBar_menuItem__setE1">
                                 <a href="{% url 'account:logout' %}" onclick="logoutAndRedirect();" style="display: inline-block; margin-left: -40px;">로그아웃</a>
-
                             </li>
                         </ul>
                     </div>
@@ -139,6 +138,7 @@ padding: 1rem;
                 <ul class="navbar-nav ml-auto">
                     <a href="/account/login/">로그인</a> /
                     <a href="/account/signup/">회원가입</a>
+
                 </ul>
             </div>
             {% endif %}

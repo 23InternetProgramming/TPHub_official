@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<module version="4">
-  <component name="PyDocumentationSettings">
-    <option name="format" value="PLAIN" />
-    <option name="myDocStringFormat" value="Plain" />
-=======
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
 <<<<<<< HEAD
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.11 (TPHub_official)" jdkType="Python SDK" />
+=======
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <orderEntry type="inheritedJdk" />
+=======
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
     <orderEntry type="inheritedJdk" />
 =======
 <<<<<<< HEAD
+>>>>>>> main
 >>>>>>> main
     <orderEntry type="jdk" jdkName="Python 3.12 (test)" jdkType="Python SDK" />
 =======
@@ -24,12 +28,18 @@
 >>>>>>> main
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
 >>>>>>> main
 =======
     <orderEntry type="jdk" jdkName="Python 3.11 (TPHub_official)" jdkType="Python SDK" />
 >>>>>>> main
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> main
 >>>>>>> main
     <orderEntry type="sourceFolder" forTests="false" />
->>>>>>> main
   </component>
 </module>
