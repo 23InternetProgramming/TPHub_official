@@ -17,7 +17,6 @@
                     {{ form.as_p }}
                     <!-- 프로필 이미지 업로드를 위한 input 추가 -->
                     <div class="row">
-                        <label class="col-lg-3 control-label">프로필 이미지</label>
                         <div class="col-lg-8">
                             {{ form.profile_image }}
                         </div>
@@ -48,13 +47,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-lg-3 control-label">학번<sup>*</sup></label>
+                            <label class="col-lg-3 control-label">학번</label>
                             <div class="col-lg-8">
                                 <input id="student_id" class="form-control short-input" type="text" value="{{ user.student_id }}" maxlength='8' required readonly>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-lg-3 control-label">학과<sup>*</sup></label>
+                            <label class="col-lg-3 control-label">학과</label>
                             <div class="col-lg-8">
                                 <input id="major" class="form-control short-input" type="text" value="{{ user.major }}" maxlength='8' required readonly>
                             </div>
@@ -66,7 +65,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-lg-3 control-label">전화번호<sup>*</sup></label>
+                            <label class="col-lg-3 control-label">전화번호</label>
                             <div class="col-lg-8">
                                 <input id="phone1" class="num-input" type='tel' name='phone1' maxlength='3' required readonly/>-
                                 <input id="phone2" class="num-input" name='phone2' maxlength='4' required readonly/>-
