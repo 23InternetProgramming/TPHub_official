@@ -37,6 +37,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
     def __str__(self):
         truncated_content = self.content[:10] + '...' if len(self.content) > 10 else self.content
         return f'[{self.pk}] | {self.category} | {self.author}) {self.title} : {truncated_content}'
@@ -68,3 +69,4 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return f'{self.post.get_absolute_url()}#comment-{self.pk}'
+
