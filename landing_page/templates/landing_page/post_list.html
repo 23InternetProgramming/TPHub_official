@@ -97,54 +97,52 @@
 <div class="card my-4 mx-0" style="width: 280px; background-color: #F1F1F1; border: none;">
     <div class="card-body">
         {% if user.is_authenticated %}
-        <div style="display:flex;">
-            <div style="display:flex; flex-direction:column; justify-content:space-between;">
-                <h5 style="bold; width: 150px; word-wrap: break-word; margin:0">
-                    어서 오세요,<br>
-                    <strong>{{ user }}</strong> 님!</h5>
-                <h6 style="margin-top:20px"><a href="{% url 'account:logout' %}" onclick="logoutAndRedirect();"
-                       style="display: inline-block; color: #D0CFD6; bold;">로그아웃</a></h6>
-            </div>
-            <div style="">
-                <div class="profile_img" style="">
-                    <img class="rounded-circle border border-3 border-white shadow"
-                         src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
-                              {% else %}{% static 'landing_page/images/user.png' %}
-                              {% endif %}"
-                         style="width 100px; height: 100px;" alt="...">
-                </div>
+        <h5 style="bold; margin-top: -10px;">
+            <br>어서 오세요,
+            <br><strong>{{ user }}</strong> 님!</h5>
+        <div style="float: right; margin-left: 10px;">
+            <div class="profile_img" style="margin-top: -70px;">
+                <img class="rounded-circle border border-3 border-white shadow" alt="..."
+                     src="{% if user_profile.profile_image.url %}{{ user_profile.profile_image.url }}
+                                  {% else %}{% static 'landing_page/images/user.png' %}
+                                  {% endif %}"
+                     style="width 100px; height: 100px;">
             </div>
         </div>
+        <h6><a href="{% url 'account:logout' %}" onclick="logoutAndRedirect();"
+           style="display: inline-block; color: #D0CFD6; bold;margin-top: 16px;">로그아웃</a></h6>
         <hr>
 
-        <div style="margin-bottom:20px">
+        <div>
             <div style="display:flex; justify-content:space-between; padding:8px 0px">
                 <h6>일정</h6>
-                <h6><div onclick="window.location.href='/schedule/'" style="color: #D0CFD6;">더보기</div></h6>
+                <h6><div onclick="window.location.href='/schedule/'"
+                         style="cursor:pointer; color: #D0CFD6;">더보기</div></h6>
             </div>
-            <div class="card" style="height:158px; font-size:12px; padding:8px; overflow:hidden;">
-                <ul style="padding-left: 0;">
+            <div class="card" style="height:155px; font-size:12px; padding:8px; overflow:hidden;">
                 {% if user.is_authenticated %}
-                    {% for todo in todos %}
-                        {% if todo.author == user %}
-                        <li style="list-style: none;">
-                            <i class="bi bi-check-lg" style="margin-right:8px"></i>
-                            {{ todo.content|truncatewords_html:5 }}
-                        </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+                    <ul style="padding-left: 0;">
+                        {% for todo in todos %}
+                            {% if todo.author == user %}
+                            <li style="list-style: none;">
+                                <i class="bi bi-check-lg" style="margin-right:8px"></i>
+                                {{ todo.content|truncatechars_html:16 }}
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
                 {% else %}
                     <p>기능을 이용하기 위해선 로그인/회원가입이 필요합니다</p>
                 {% endif %}
-            </div><br>
+            </div>
         </div>
 
         <div class="musicbox">
+            <br>
             <h6>오늘의 음악</h6>
             <iframe style="border-radius:12px"
                     src="https://open.spotify.com/embed/playlist/4FUoa4B7ObLkrSAjVKZpwj?utm_source=generator"
-                    width="100%" frameBorder="0" allowfullscreen=""
+                    width="250" height="152" frameBorder="0" allowfullscreen=""
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                     loading="lazy">
             </iframe>
