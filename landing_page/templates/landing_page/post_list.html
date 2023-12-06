@@ -89,16 +89,15 @@
                      style="width 100px; height: 100px;">
             </div>
         </div>
-        <h6><div onclick="logoutAndRedirect();"
-       style="display: inline-block; color: #D0CFD6; font-weight: bold; margin-top: 16px; cursor: pointer;">로그아웃</div></h6>
-
+        <h6><a href="{% url 'account:logout' %}" onclick="logoutAndRedirect();"
+           style="display: inline-block; color: #D0CFD6; bold;margin-top: 16px;">로그아웃</a></h6>
         <hr>
 
         <div>
             <div style="display:flex; justify-content:space-between; padding:8px 0px">
-                <div>일정</div>
+                <h6>일정</h6>
                 <h6><div onclick="window.location.href='/schedule/'"
-                         style="cursor:pointer">더보기</div></h6>
+                         style="cursor:pointer; color: #D0CFD6;">더보기</div></h6>
             </div>
             <div class="card" style="height:155px; font-size:12px; padding:8px; overflow:hidden;">
                 {% if user.is_authenticated %}
