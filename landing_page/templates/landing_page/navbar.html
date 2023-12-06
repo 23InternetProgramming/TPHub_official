@@ -121,7 +121,7 @@ padding: 1rem;
                 <div class="loginUser_userWrapper__1c_jd">
                     <img class="loginUser_userImg__1JpxQ" alt="userImg"
                         src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
-                              {% else %}http://placehold.it/30x30
+                              {% else %}{% static 'landing_page/images/user.png' %}
                               {% endif %}">
                     <svg stroke-width="0" viewBox="0 0 24 24" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 10l5 5 5-5z"></path>

@@ -20,7 +20,11 @@
                 <div class="d-flex align-items-center">
                     <!-- 작성자 프로필 사진 (원 모양) -->
                     <img src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
+<<<<<<< HEAD
+                              {% else %}{% static 'landing_page/images/user.png' %}
+=======
                               {% else %}http://placehold.it/40x40
+>>>>>>> main
                               {% endif %}"
                          alt="{{ post.author.username }}'s profile picture"
                          class="rounded-circle" height="40" width="40">
@@ -111,9 +115,9 @@
             <!-- Single Comment -->
             <div class="media mb-4" id="comment-{{ comment.pk }}">
                 <div class="media-body">
-                    <img class="d-flex mr-3 rounded-circle" alt=""
+                    <img class="d-flex mr-3 rounded-circle" height="40" width="40" alt=""
                          src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
-                              {% else %}http://placehold.it/50x50
+                              {% else %}{% static 'landing_page/images/user.png' %}
                               {% endif %}">
                     {% if user.is_authenticated and comment.author == user %}
                     <div class="d-flex justify-content-between align-items-center">
@@ -164,18 +168,22 @@
 
     <div class="col-lg-4">
         <!-- Categories Widget -->
-        <div class="card my-4">
+        <div class="card">
             <div class="card-body">
                 <p>"{{ post.category }}"의 다른 게시물</p>
                 {% for category in categories %}
                 {% if category == post.category %}
                 <ul class="list-unstyled mb-0">
                     {% for c in category.get_queryset|slice:":3" %}
-                    <li>
-                        <a href="{{ c.get_absolute_url }}">
-                            {{ c.title|slice:":10" }}{% if c.title|length > 10 %}...{% endif %}
-                        </a>
-                    </li>
+                    {% if c != post %}
+                        <li>
+                            <a href="{{ c.get_absolute_url }}">
+                                {{ c.title|slice:":10" }}{% if c.title|length > 10 %}...{% endif %}
+                            </a>
+                        </li>
+                    {% else %}
+                        <p style="font-size:12px">다른 게시물이 없습니다</p>
+                    {% endif %}
                     {% endfor %}
                 </ul>
                 <a href="{{ category.get_absolute_url }}" style="text-align: right; display: block;">

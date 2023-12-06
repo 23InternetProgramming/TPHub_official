@@ -60,14 +60,14 @@
     {% if user.is_authenticated and post_list.exists %}
     {% for p in post_list %}
     <a class="centered-element" href="{{ p.get_absolute_url }}" style="text-decoration: none; color:black;">
-        <div class="row mb-2">
+        <div style="display:flex; justify-content:space-evenly">
             <!-- 게시물 제목 / 작성자 / 카테고리 -->
             <div class="col-md-6">
-                <div class="row mb-2">{{ p.title|truncatewords:20 }}</div>
-                <div class="row mb-2">{{ p.author }} ⦁ {{ p.category }}</div>
+                <div class="">{{ p.title|truncatewords:20 }}</div>
+                <div class="">{{ p.author }} ⦁ {{ p.category }}</div>
             </div>
             <!-- 댓글수 -->
-            <div class="col-md-2">
+            <div class="">
                 <i class="far fa-comment-dots"></i>
                 <span class="mr-2" >
                     {% if p.comment_set.exists %}
@@ -78,9 +78,9 @@
                 </span>
             </div>
             <!-- 작성자 프로필 사진 / 작성일자 및 시간 -->
-            <div class="col-md-4 text-right">
+            <div class="text-right">
                 <img alt="" src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
-                                  {% else %}http://placehold.it/30x30
+                                  {% else %}{% static 'landing_page/images/user.png' %}
                                   {% endif %}"
                      style="width:30px; height:30px; border-radius: 50%; object-fit: cover"
                 >
