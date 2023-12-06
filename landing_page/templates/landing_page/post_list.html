@@ -3,16 +3,34 @@
 
 <!---------------------------- 좌측 위젯!------------------------------------------->
 {% block left_area %}
-<div class="card my-4 mx-0" style=" background-color: #F1F1F1; border: none;">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'landing_page/css/styles.css' %}">
+    <script src="{% static 'landing_page/script/script.js' %}"></script>
 
-    <div class="card-body" >
+    <div id="cal-base" class="cal-container">
+        <div class="calendar" id="table">
+            <div class="header">
+                <!-- Aqui é onde ficará o h1 com o mês e o ano -->
+                <div class="month" id="month-header">
 
-            <h5 >
-                어서 오세요,
-            </h5>
-
+                </div>
+                <div class="buttons">
+                    <button class="icon" onclick="prevMonth()"><i class="fas fa-chevron-left"></i></button>
+                    <button class="icon" onclick="nextMonth()"><i class="fas fa-chevron-right "></i></button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
+    <script src="https://kit.fontawesome.com/812e771e48.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Wait for the document to be ready before calling createCal()
+        document.addEventListener("DOMContentLoaded", function () {
+            // Call createCal() here
+            createCal();
+        });
+    </script>
 {% endblock %}
 
 
@@ -81,11 +99,13 @@
         {% if user.is_authenticated %}
         <h5 style="bold; margin-top: -10px;">
             <br>어서 오세요,
-            <br><strong>{{ user.user }}</strong> 님!</h5>
+            <br><strong>{{ user }}</strong> 님!</h5>
         <div style="float: right; margin-left: 10px;">
             <div class="profile_img" style="margin-top: -70px;">
-                <img class="rounded-circle border border-3 border-white shadow"
-                     src="{% static 'member/images/PSH.png' %}" alt="..."
+                <img class="rounded-circle border border-3 border-white shadow" alt="..."
+                     src="{% if user_profile.profile_image.url %}{{ user_profile.profile_image.url }}
+                                  {% else %}{% static 'landing_page/images/user.png' %}
+                                  {% endif %}"
                      style="width 100px; height: 100px;">
             </div>
         </div>
@@ -95,8 +115,9 @@
 
         <div>
             <div style="display:flex; justify-content:space-between; padding:8px 0px">
-                <div>일정</div>
-                <div onclick="window.location.href='/schedule/'" style="hover:pointer">더보기</div>
+                <h6>일정</h6>
+                <h6><div onclick="window.location.href='/schedule/'"
+                         style="cursor:pointer; color: #D0CFD6;">더보기</div></h6>
             </div>
             <div class="card" style="height:155px; font-size:12px; padding:8px; overflow:hidden;">
                 {% if user.is_authenticated %}
@@ -117,6 +138,7 @@
         </div>
 
         <div class="musicbox">
+            <br>
             <h6>오늘의 음악</h6>
             <iframe style="border-radius:12px"
                     src="https://open.spotify.com/embed/playlist/4FUoa4B7ObLkrSAjVKZpwj?utm_source=generator"

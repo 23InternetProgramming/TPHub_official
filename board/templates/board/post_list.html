@@ -79,7 +79,7 @@
             </div>
             <!-- 작성자 프로필 사진 / 작성일자 및 시간 -->
             <div class="text-right">
-                <img alt="" src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
+                <img alt="" src="{% if user_profile.profile_image.url %}{{ user_profile.profile_image.url }}
                                   {% else %}{% static 'landing_page/images/user.png' %}
                                   {% endif %}"
                      style="width:30px; height:30px; border-radius: 50%; object-fit: cover"
