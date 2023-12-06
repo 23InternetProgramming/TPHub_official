@@ -1,4 +1,3 @@
-from django.conf.urls import url
 from django.urls import path
 
 from . import views
@@ -9,8 +8,8 @@ urlpatterns = [
     path('index', views.index, name='index'),
     path('createTodo', views.create_todo, name='createTodo'),
     path('deleteTodo', views.deleteTodo, name='deleteTodo'),
-    url(r'^$', views.CalendarView.as_view(), name='calendar'),
-    url(r'^event/new/$', views.event, name='event_new'),
-    url(r'^event/edit/(?P<event_id>\d+)/$', views.event, name='event_edit'),
-    url(r'^event/delete/(?P<pk>\d+)/$', EventDeleteView.as_view(), name='event_delete'),
+    path('', views.CalendarView.as_view(), name='calendar'),  # 수정된 부분
+    path('event/new/', views.event, name='event_new'),  # 수정된 부분
+    path('event/edit/<int:event_id>/', views.event, name='event_edit'),  # 수정된 부분
+    path('event/delete/<int:pk>/', EventDeleteView.as_view(), name='event_delete'),  # 수정된 부분
 ]
