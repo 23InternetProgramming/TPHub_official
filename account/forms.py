@@ -17,7 +17,6 @@ class ExtendedUserCreationForm(UserCreationForm):
         user = super().save(commit=False)
         if commit:
             user.save()
-
             # UserProfile 모델에 저장
             UserProfile.objects.create(
                 user=user,

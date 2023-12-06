@@ -1,12 +1,11 @@
 from django.urls import path
 from . import views
-from django.urls import path
-from .views import save_profile
+from .views import view_profile, user_profile_update_form
 
 app_name = 'self_profile'
 
 urlpatterns = [
     path('', views.PostList.as_view()),
-    path('save_profile/', save_profile, name='save_profile'),
-
+    path('view_profile/', views.view_profile, name='view_profile'),
+    path('user_profile_update_form/', user_profile_update_form, name='user_profile_update_form'),
 ]
