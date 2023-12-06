@@ -1,6 +1,10 @@
 {% block personal_schedule %}
+  {% load static %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'schedule/css/todo.css' %}">
+</head>
 
-<div class="container">
+<div class="container" style="padding: 20px; border: 1px solid #ccc;background-color: #ADBC00;">
         <div class="header">
             <div class="page-header">
                 {% if user.is_authenticated %}
@@ -10,6 +14,7 @@
                     <p> 로그인이 필요합니다 </p>
                 {% endif %}
             </div>
+
         </div>
         <div class="content">
             {% if user.is_authenticated %}
@@ -19,7 +24,7 @@
                     <div class="input-group">
                         <input id="todoContent" name="todoContent" type="text" class="form-control" placeholder="개인일정 추가하기">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit">추가</button>
+                            <button class="btn btn-default" style="background: white;" type="submit">추가</button>
                         </span>
                     </div>
                 </form>
@@ -33,10 +38,12 @@
                         {% if todo.author == user %}
                         <form action="./deleteTodo" method="GET">
                             <div class="input-group">
-                                <li class="list-group-item">{{ todo.content }}</li>
+                                <div class="list-group-item-container">
+                                <li class="list-group-item">{{ todo.content | slice:":10" }} {% if todo.content|length > 10 %}...{% endif %}</li>
                                 <input type="hidden" id="todoNum" name="todoNum" value="{{ todo.id }}">
+                                 </div>
                                 <span class="input-group-addon">
-                                    <button type="submit" class="custom-btn btn btn-black">완료</button>
+                                    <button type="submit" style="background: white;" class="custom-btn btn btn-black">완료</button>
                                 </span>
                             </div>
                         </form>
