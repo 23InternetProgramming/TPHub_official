@@ -1,0 +1,10 @@
+{% extends 'self_profile/base.html' %}
+
+{% block main_area %}
+  <h2>프로필 수정</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">저장하기</button>
+  </form>
+{% endblock %}

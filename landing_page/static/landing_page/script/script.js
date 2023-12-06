@@ -16,7 +16,6 @@ const months = [
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 
-
 // Váriavel principal
 let date = new Date();
 
@@ -188,7 +187,6 @@ function prevMonth() {
     date = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
     generateCalendar(date);
 }
-
 function prevDay() {
     date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
     generateCalendar();
@@ -203,5 +201,4 @@ function createCal() {
     date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     generateCalendar();
 }
-
 document.onload = generateCalendar(date);

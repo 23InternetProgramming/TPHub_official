@@ -20,7 +20,11 @@
                 <div class="d-flex align-items-center">
                     <!-- 작성자 프로필 사진 (원 모양) -->
                     <img src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
+<<<<<<< HEAD
                               {% else %}{% static 'landing_page/images/user.png' %}
+=======
+                              {% else %}http://placehold.it/40x40
+>>>>>>> main
                               {% endif %}"
                          alt="{{ post.author.username }}'s profile picture"
                          class="rounded-circle" height="40" width="40">
