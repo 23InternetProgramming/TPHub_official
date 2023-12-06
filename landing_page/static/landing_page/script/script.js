@@ -1,20 +1,19 @@
 const months = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
 ];
 
-const weekdays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
-
+const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 
 // Váriavel principal
@@ -144,7 +143,7 @@ function changeHeader(dateHeader) {
     if (month.childNodes[0]) {
         month.removeChild(month.childNodes[0]);
     }
-    const headerMonth = document.createElement("h1");
+    const headerMonth = document.createElement("h5");
     const textMonth = document.createTextNode(months[dateHeader.getMonth()].substring(0, 3) + " " + dateHeader.getFullYear());
     headerMonth.appendChild(textMonth);
     month.appendChild(headerMonth);
@@ -180,16 +179,14 @@ function changeDate(button) {
 
 // Funções de avançar e retroceder mês e dia
 function nextMonth() {
-    date = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+    date = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
     generateCalendar(date);
 }
 
 function prevMonth() {
-    date = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+    date = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
     generateCalendar(date);
 }
-
-
 function prevDay() {
     date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
     generateCalendar();
@@ -200,4 +197,8 @@ function nextDay() {
     generateCalendar();
 }
 
+function createCal() {
+    date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    generateCalendar();
+}
 document.onload = generateCalendar(date);

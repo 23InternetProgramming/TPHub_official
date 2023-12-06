@@ -2,26 +2,17 @@
 
 {% block main_area %}
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-
 <div class="self_profile">
     <div class="row well">
         <div class="col-md-15">
             <div class="panel" style="height: 250px;">
                 <img class="rounded-circle border border-0 border-white shadow" alt="..."
-                     src="{% if post.author.profile_picture.url %}{{ post.author.profile_picture.url }}
+                     src="{% if user_profile.profile_image.url %}{{ user_profile.profile_image.url }}
                           {% else %}http://placehold.it/30x30
                           {% endif %}"
-                     style="width 40%; height: 40%; margin-top: 135px; margin-left: 20px;">
+                     style=" height: 40%; margin-top: 135px; margin-left: 20px;">
                 <form class="form-horizontal" role="form" id="profileForm" onsubmit="return showSaveConfirmation()" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <!-- 프로필 이미지 업로드를 위한 input 추가 -->
-                    <div class="row">
-                        <label class="col-lg-3 control-label">프로필 이미지</label>
-                        <div class="col-lg-8">
-                            {{ form.profile_image }}
-                        </div>
-                    </div>
                 </form>
                 <div class="name ml-3" style="position: absolute; top: 170px; left: 15px; font-size:2.5rem;">
                     <small>{{ user.username }}</small>
@@ -31,165 +22,57 @@
                 </div>
             </div>
         </div>
-
         <div class="container bootstrap snippets bootdey">
             <br>
             <h3 class="text-dark mx-4">프로필</h3>
             <br>
-            <div class="row mx-3">
-                <div class="col-md-9 personal-info">
-                    <form class="form-horizontal" role="form" id="profileInfoForm" onsubmit="return showSaveConfirmation()">
+            <div class="">
+                <form class="" role="form" id="profileInfoForm" onsubmit="return showSaveConfirmation()">
+                    <div class="col-md-9">
                         {% csrf_token %}
+                        {{ form.as_p }}
                         <!-- 사용자 정보 입력 -->
-                        <div class="row">
-                            <label class="col-lg-3 control-label">사용자 이름</label>
-                            <div class="col-lg-8">
-                                <input id="username" class="form-control short-input" type="text" value="{{ user.username }}" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">학번<sup>*</sup></label>
-                            <div class="col-lg-8">
-                                <input id="student_id" class="form-control short-input" type="text" value="{{ user.student_id }}" maxlength='8' required readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">학과<sup>*</sup></label>
-                            <div class="col-lg-8">
-                                <input id="major" class="form-control short-input" type="text" value="{{ user.major }}" maxlength='8' required readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">이메일</label>
-                            <div class="col-lg-8">
-                                <input id="email" class="form-control short-input" type="email" value="{{ user.email }}" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">전화번호<sup>*</sup></label>
-                            <div class="col-lg-8">
-                                <input id="phone1" class="num-input" type='tel' name='phone1' maxlength='3' required readonly/>-
-                                <input id="phone2" class="num-input" name='phone2' maxlength='4' required readonly/>-
-                                <input id="phone3" class="num-input" name='phone3' maxlength='4' required readonly/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">포지션</label>
-                            <div class="col-lg-8">
-                                <input id="role" class="form-control link-input" type="text" value="" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">Git</label>
-                            <div class="col-lg-8">
-                                <input id="git" class="form-control link-input" type="text" value="" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">인스타그램</label>
-                            <div class="col-lg-8">
-                                <input id="instagram" class="form-control link-input" type="text" value="" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">페이스북</label>
-                            <div class="col-lg-8">
-                                <input id="facebook" class="form-control link-input" type="text" value="" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-8 offset-lg-3 ml-1">
-                                <button type="button" id="editButton" class="btn btn-primary" onclick="toggleEditMode();">수정하기</button>
-                            </div>
-                        </div>
-                        <br><hr><br>
-                    </form>
-                </div>
-            </div>
-
-           <h3 class="text-dark mx-4">비밀번호 변경</h3><br>
-            <!-- 비밀번호 변경 폼 -->
-            <div class="row mx-3">
-                <div class="col-md-9 personal-info">
-                    <form class="form-horizontal" role="form" id="passwordChangeForm">
-                        <div class="row">
-                            <label class="col-lg-3 control-label">현재 비밀번호</label>
-                            <div class="col-lg-8">
-                                <input class="form-control short-input" type="password" name="current_password" maxlength='10'>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">새 비밀번호</label>
-                            <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='10'>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-lg-3 control-label">새 비밀번호 확인</label>
-                            <div class="col-lg-8">
-                                <input class="form-control short-input" type="text" value="" maxlength='10'>
-                            <div class="row">
-                            <div class="col-lg-8 offset-lg-3 ml-1">
-                                <button type="button" id="saveButton" class="btn btn-success" style="display: none;" onclick="saveData();">저장하기</button>
-                            </div>
-                        </div>
-                            </div>
-                            <br><br>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="col-lg-8 offset-lg-3 ml-1">
+                        <a href="{% url 'self_profile:user_profile_update_form' %}" class="btn btn-primary">수정하기</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 <script>
-   function toggleEditMode() {
-    var form = document.getElementById('profileInfoForm');
-    var inputs = form.querySelectorAll('input, select');
+    function toggleEditMode() {
+        console.log("Edit button clicked");
 
-    // 편집 활성화
-    inputs.forEach(function(input) {
-        input.removeAttribute('readonly');
-    });
+        var form = document.getElementById('profileInfoForm');
+        var inputs = form.querySelectorAll('input, select');
 
-    var editButton = document.getElementById('editButton');
-    var saveButton = document.getElementById('saveButton');
+        // 편집 활성화
+        inputs.forEach(function(input) {
+            input.removeAttribute('readonly');
+        });
 
-    editButton.disabled = true;
-    saveButton.style.display = 'block';
-    editButton.style.display = 'none';
-}
+        var editButton = document.getElementById('editButton');
+        var saveButton = document.getElementById('saveButton');
 
-function saveData() {
-    var form = document.getElementById('profileInfoForm');
-    var inputs = form.querySelectorAll('input, select');
+        editButton.disabled = true;
+        saveButton.style.display = 'block';
+        editButton.style.display = 'none';
+    }
 
-    $.ajax({
-        url: '/your-save-profile-url/',
-        type: 'POST',
-        data: $(form).serialize(),
-        success: function(response) {
-            console.log(response);
-            // 성공적으로 저장된 경우 수행할 작업 추가
-        },
-        error: function(error) {
-            console.log(error);
-            // 오류 처리 로직 추가
-        }
-    });
+        // 입력 폼을 읽기 전용으로 전환
+        inputs.forEach(function(input) {
+            input.setAttribute('readonly', 'readonly');
+        });
 
-    // 입력 폼을 읽기 전용으로 전환
-    inputs.forEach(function(input) {
-        input.setAttribute('readonly', 'readonly');
-    });
+        var editButton = document.getElementById('editButton');
+        var saveButton = document.getElementById('saveButton');
 
-    var editButton = document.getElementById('editButton');
-    var saveButton = document.getElementById('saveButton');
-
-    editButton.disabled = false;
-    saveButton.style.display = 'none';
-    editButton.style.display = 'block';
-}
+        editButton.disabled = false;
+        saveButton.style.display = 'none';
+        editButton.style.display = 'block';
+    }
 </script>
 
 {% endblock %}

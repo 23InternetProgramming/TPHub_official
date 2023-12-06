@@ -6,7 +6,7 @@ Event
 
 {% block calendar_area %}
 <div class="clearfix">
-    <a class="btn btn-info" href="{% url 'schedule:calendar' %}">Calendar</a>
+    <a class="btn btn-dark" href="{% url 'schedule:calendar' %}">Calendar</a>
     {% if form.instance.id %}
     <a class="btn btn-danger" href="{% url 'schedule:event_delete' form.instance.id %}" role="button">Delete Event</a>
     {% endif %}
@@ -19,7 +19,7 @@ Event
         {{ form }}
         <tr>
             <td colspan="2">
-                <button type="submit" class="btn btn-info right"> Submit</button>
+                <button type="submit" class="btn btn-dark right"> Submit</button>
             </td>
         </tr>
     </table>
