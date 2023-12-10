@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <style>
 
     .navbar_logo {
@@ -120,7 +119,7 @@ padding: 1rem;
                 {% if user.is_authenticated %}
                 <div class="loginUser_userWrapper__1c_jd">
                     <img class="loginUser_userImg__1JpxQ" alt="userImg"
-                        src="{% if user_profile.profile_image.url %}{{ user_profile.profile_image.url }}
+                        src="{% if user_profile.profile_image %}{{ user_profile.profile_image.url }}
                               {% else %}{% static 'landing_page/images/user.png' %}
                               {% endif %}">
                     <svg stroke-width="0" viewBox="0 0 24 24" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">

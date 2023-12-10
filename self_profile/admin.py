@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, UserProfile
+from .models import UserProfile
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -8,4 +8,3 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(UserProfile, UserProfileAdmin)
-admin.site.register(Post)

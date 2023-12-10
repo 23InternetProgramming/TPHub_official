@@ -39,7 +39,7 @@
                         <form action="./deleteTodo" method="GET">
                             <div class="input-group">
                                 <div class="list-group-item-container">
-                                <li class="list-group-item">{{ todo.content | slice:":10" }} {% if todo.content|length > 10 %}...{% endif %}</li>
+                                <li class="list-group-item">{{ todo.content }}</li>
                                 <input type="hidden" id="todoNum" name="todoNum" value="{{ todo.id }}">
                                  </div>
                                 <span class="input-group-addon">
