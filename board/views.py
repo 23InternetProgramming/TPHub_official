@@ -40,7 +40,7 @@ class PostDelete(LoginRequiredMixin, DeleteView):
     success_url = '/board/'
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user == self.get_object().author:
+        if request.user.is_authenticated and (request.user.is_superuser or request.user == self.get_object().author):
             return super(PostDelete, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
@@ -52,7 +52,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'board/post_update_form.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user == self.get_object().author:
+        if request.user.is_authenticated and (request.user.is_superuser or request.user == self.get_object().author):
             return super(PostUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
@@ -63,11 +63,11 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     fields = ['category', 'title', 'content', 'file_upload']
 
     def test_func(self):
-        return self.request.user.is_superuser or self.request.user.is_staff
+        return self.request.user.is_authenticated
 
     def form_valid(self, form):
         current_user = self.request.user
-        if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
+        if current_user.is_authenticated:
             form.instance.author = current_user
             return super(PostCreate, self).form_valid(form)
         else:
@@ -117,7 +117,7 @@ def category_post(request, slug):
 
     return render(
         request,
-        'board/post_list.html',
+        'board/landing_list.html',
         {
             'post_list': post_list,
             'categories': Category.objects.all(),

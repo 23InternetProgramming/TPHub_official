@@ -4,5 +4,5 @@ from . import views
 app_name = 'landing_page'
 
 urlpatterns = [
-    path('', views.PostList.as_view())
+    path('', views.LandingList.as_view())
 ]

@@ -1,12 +1,14 @@
 from django.views.generic import ListView
 from schedule.models import Todo
-from .models import Post
+from .models import Landing
+from self_profile.models import UserProfile
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 
-class PostList(ListView):
-    model = Post
+class LandingList(ListView):
+    #user_profile = UserProfile.objects.get(user=request.user)
+    model = Landing
     ordering = '-pk'
 
     def get_context_data(self, **kwargs):
@@ -18,4 +20,8 @@ class PostList(ListView):
 
 @login_required
 def base(request):
-    return render(request, 'landing_page/base.html')
+    user_id = request.session.get('user')
+    if user_id:
+        user_profile = UserProfile.objects.get(user=user_id)
+    #user_profile = UserProfile.objects.get(user=request.user)
+    return render(request, 'landing_page/base.html', {'user_profile': user_profile, 'user_id':user_id})

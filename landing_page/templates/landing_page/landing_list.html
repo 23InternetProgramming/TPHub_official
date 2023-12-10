@@ -97,20 +97,29 @@
 <div class="card my-4 mx-0" style="width: 280px; background-color: #F1F1F1; border: none;">
     <div class="card-body">
         {% if user.is_authenticated %}
-        <h5 style="bold; margin-top: -10px;">
-            <br>어서 오세요,
-            <br><strong>{{ user }}</strong> 님!</h5>
-        <div style="float: right; margin-left: 10px;">
-            <div class="profile_img" style="margin-top: -70px;">
-                <img class="rounded-circle border border-3 border-white shadow" alt="..."
-                     src="{% if user_profile.profile_image.url %}{{ user_profile.profile_image.url }}
-                                  {% else %}{% static 'landing_page/images/user.png' %}
-                                  {% endif %}"
-                     style="width 100px; height: 100px;">
+        <div style="display:flex;">
+            <div style="width:148px; display:flex; flex-direction:column; justify-content: space-evenly; word-wrap: break-word;">
+                <div style="" >
+                    <h5 style="bold; margin:0px 0px 16px">
+                        어서 오세요,
+                        <br><strong>{{ user }}</strong> 님!</h5>
+                </div>
+                <h6 style="margin:0"><a href="{% url 'account:logout' %}" onclick="logoutAndRedirect();"
+                   style="display: inline-block; color: #D0CFD6; bold;">로그아웃</a></h6>
+            </div>
+            <div style="width: 100px; display: flex;
+            flex-direction:column; justify-content: center;">
+                <div class="rounded-circle border border-3 border-white shadow"
+                     style="width: 100px; height: 100px; display: flex; justify-content: center; align-items: center; overflow:hidden">
+                    <img style="width: auto; height: auto; max-width: 100%; max-height: 100%;" alt="..."
+                         src="{% if landing_list.user_profile.profile_image %}{{ landing_list.user_profile.profile_image.url }}
+                              {% else %}{% static 'landing_page/images/user.png' %}
+                              {% endif %}"
+                    >
+                </div>
             </div>
         </div>
-        <h6><a href="{% url 'account:logout' %}" onclick="logoutAndRedirect();"
-           style="display: inline-block; color: #D0CFD6; bold;margin-top: 16px;">로그아웃</a></h6>
+
         <hr>
 
         <div>

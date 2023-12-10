@@ -121,7 +121,7 @@ function generateCalendar() {
     }
     // Adiciona a tabela a div que ela deve pertencer
     const content = document.getElementById('table');
-    content.appendChild(table);
+    content.appendChild('table');
     changeActive();
     changeHeader(date);
     document.getElementById('date').textContent = date;

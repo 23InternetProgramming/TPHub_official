@@ -6,20 +6,23 @@
 <div class="self_profile">
     <div class="row well">
         <div class="col-md-15">
-            <div class="panel" style="height: 250px;">
-                <img class="rounded-circle border border-0 border-white shadow" alt="..."
-                     src="{% if user_profile.profile_image.url %}{{ user_profile.profile_image.url }}
-                          {% else %}{% static 'landing_page/images/user.png' %}
-                          {% endif %}"
-                     style="width 40%; height: 40%; margin-top: 135px; margin-left: 20px;">
-                <form class="form-horizontal" role="form" id="profileForm" onsubmit="return showSaveConfirmation()" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                </form>
-                <div class="name ml-3" style="position: absolute; top: 170px; left: 15px; font-size:2.5rem;">
-                    <small>{{ user.username }}</small>
+            <div class="panel" style="height: 250px; position: relative; ">
+                <div class="rounded-circle border border-0 border-white shadow"
+                     style="width: 100px; height: 100px; position: absolute; bottom: 10px; left: 10px;
+                     display: flex; justify-content: center; align-items: center; overflow:hidden">
+                    <img style="width: auto; height: auto; max-width: 100%; max-height: 100%;" alt="..."
+                         src="{% if user_profile.profile_image %}{{ user_profile.profile_image.url }}
+                              {% else %}{% static 'landing_page/images/user.png' %}
+                              {% endif %}"
+                    >
                 </div>
-                <div class="name ml-3" style="position: absolute; top: 220px; left: 15px; font-size:1rem;">
-                    가입일: {{ user.date_joined|date:"Y.m.d" }}
+                <div style="position: absolute; bottom:10px; left:120px">
+                    <div class="" style="font-size:2.5rem;">
+                        <small>{{ user.username }}</small>
+                    </div>
+                    <div class="" style="font-size:1rem;">
+                        가입일: {{ user.date_joined|date:"Y.m.d" }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -14,104 +14,82 @@
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-
-
     <style>
-
-
-        @font-face {
+    @font-face {
         font-family: 'Pretendard-Regular';
         src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
         font-weight: 400;
         font-style: normal;
     }
-        @font-face {
+    @font-face {
         font-family: 'Pretendard-ExtraBold';
         src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
         font-weight: 800;
         font-style: normal;
     }
-
     body {
         font-family: 'Pretendard-Regular', sans-serif; /* 폰트 적용 */
         background-color: #FFFEF8 !important;
         margin-top: 20px;
         background: rgba(241, 246, 253);
         overflow-x: hidden;
-
     }
-
-
     h3, strong {
         font-family: 'Pretendard-ExtraBold', sans-serif; /* 폰트 적용 */
     }
-
     h6 {
         font-family: 'Pretendard-ExtraBold', sans-serif; /* 폰트 적용 */
     }
-
     small, h5, li{
         font-family: 'Pretendard-Regular', sans-serif; /* 폰트 적용 */
         font-weight: 400;
         font-style: normal;
     }
-
     .rounded-circle {
         border-radius: 50%!important;
     }
     .border-5 {
         border-width: 5px;
     }
-
     .btn.btn-primary {
-    background: #f0ad4e none repeat scroll 0 0;
-    border-color: #f0ad4e;
-    color: #ffffff;
-    font-size: 14px;
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    padding: 0;
+        background: #f0ad4e none repeat scroll 0 0;
+        border-color: #f0ad4e;
+        color: #ffffff;
+        font-size: 14px;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        padding: 0;
     }
-
 
     body::-webkit-scrollbar {
         width: 8px;  /* 스크롤바의 너비 */
     }
-
     body::-webkit-scrollbar-thumb {
         height: 30%; /* 스크롤바의 길이 */
         background: #E2E2E2; /* 스크롤바의 색상 */
-
         border-radius: 10px;
     }
-
     body::-webkit-scrollbar-track {
         background: #ffffff;  /*스크롤바 뒷 배경 색상*/
     }
-
-    .panel
-    {
+    .panel {
         background-image:url("https://mblogthumb-phinf.pstatic.net/MjAyMjA1MTdfNTMg/MDAxNjUyNzI5MDY1NDQx.YekXJaXeln8bjN8oZg35K0WOiO6YuXzt54MRzoLMhd0g.Ixcb8778V1dott3d3CVl-3zwtZ-NG7AvZdLKdX-d0tsg.JPEG.uuueeee/%EC%9E%90%EB%8F%99%EC%B0%A8-%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4.jpg?type=w800");
     }
     .border-white {
         border-opacity: 1;
         border-color: rgba(255,255,255, 1) !important;
     }
-
     .shadow {
         box-shadow: 0 0.375rem 1.5rem 0 rgba(140,152,164,.125)!important;
     }
-
     p {
         color: blue;
     }
-
     img {
         max-width: 100%;
         height: auto;
     }
-
     .icon-sm {
         width: 1.5rem;
         height: 1.5rem;
@@ -125,32 +103,26 @@
     .rounded-circle {
         border-radius: 50%!important;
     }
-
     .hover-top-in .hover-top--in {
         transition: ease-in-out all .35s;
         position: relative;
         top: 0
     }
-
     .hover-top-in:hover .hover-top--in {
         top: -10px
     }
-
     .me-1 {
         margin-right: 0.25rem!important;
     }
-
     .fw-700 {
         font-weight: 700!important;
     }
     .mb-1 {
         margin-bottom: 0.25rem!important;
     }
-
     .z-index-1 {
         z-index: 1!important;
     }
-
     .pt-6 {
         padding-top: 2.5rem!important;
     }
@@ -160,7 +132,6 @@
     .mt-n4 {
         margin-top: -1.5rem!important;
     }
-
     .shadow {
         box-shadow: 0 0.375rem 1.5rem 0 rgba(var(--bs-gray-700-rgb),.125)!important;
     }
@@ -174,18 +145,15 @@
     .overflow-hidden {
         overflow: hidden!important;
     }
-
     #myCarousel .carousel-control-prev,
     #myCarousel .carousel-control-next {
         display: none;
     }
-    </style>
-
+</style>
 
     <title>TPHub</title>
 
     <link rel="stylesheet" href="{% static 'landing_page/bootstrap/bootstrap.min.css' %}" media="screen">
-
     <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
     <!-- jQuery 및 Bootstrap JavaScript 추가 -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -202,71 +170,75 @@
 
 
 <body class="d-flex flex-column min-vh-100">
-<!-- NavBar -->
-{% include 'landing_page/navbar.html' %}
+    <!-- NavBar -->
+    {% include 'landing_page/navbar.html' %}
 
-<div class="container my-3">
-    <div class="row justify-content-center">
-        <div class="row">
-            <div class="col-md-3" id="left-area" style="width: 280px; margin-top: -8px; margin-right: -15px">
-                <!-- 좌측 박스 -->
-                <div class="card my-4 mx-0" style="background-color: #F1F1F1; border: none;" >
-                    {% block left_area %}
-                    {% endblock %}
-                </div>
+    <div class="container my-3">
+        <div class="row justify-content-center">
+            <div class="row">
 
-                <div class="container mt-3" style="width: 302px; margin-left: -22px;" >
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <div class="col-md-3" id="left-area" style="width: 280px; margin-top: -8px; margin-right: -15px">
+                    <!-- 좌측 박스 -->
+                    <div class="card my-4 mx-0" style="background-color: #F1F1F1; border: none;" >
+                        {% block left_area %}
+                        {% endblock %}
+                    </div>
 
-                        <!-- The slideshow -->
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <a href="https://github.com/" target="_blank">
-                                    <img src="{% static 'landing_page/images/slide1.png' %}" alt="Git" >
-                                </a>
+                    <div class="container mt-3" style="width: 302px; margin-left: -22px;" >
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+                            <!-- The slideshow -->
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <a href="https://github.com/" target="_blank">
+                                        <img src="{% static 'landing_page/images/slide1.png' %}" alt="Git" >
+                                    </a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a href="https://lms.duksung.ac.kr/login.php" target="_blank">
+                                        <img src="{% static 'landing_page/images/slide2.png' %}" alt="eClass" width="800" height="180">
+                                    </a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a href="https://sso.duksung.ac.kr/svc/tk/Auth.do?ac=Y&ifa=N&id=portal&" target="_blank">
+                                        <img src="{% static 'landing_page/images/slide3.png' %}" alt="Portal" width="800" height="180">
+                                    </a>
+                                </div>
                             </div>
-                            <div class="carousel-item">
-                                <a href="https://lms.duksung.ac.kr/login.php" target="_blank">
-                                    <img src="{% static 'landing_page/images/slide2.png' %}" alt="eClass" width="800" height="180">
-                                </a>
-                            </div>
-                            <div class="carousel-item">
-                                <a href="https://sso.duksung.ac.kr/svc/tk/Auth.do?ac=Y&ifa=N&id=portal&" target="_blank">
-                                    <img src="{% static 'landing_page/images/slide3.png' %}" alt="Portal" width="800" height="180">
-                                </a>
-                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a>
                         </div>
-
-                        <!-- Left and right controls -->
-                        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </a>
-                        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </a>
                     </div>
                 </div>
 
-            </div>
+                <div class="col-md-7" id="main-area">
+                    <!-- 메인 박스 -->
+                    <div class="card-body" style="min-height: 700px;">
+                        {% block main_area %}
+                        {% endblock %}
+                    </div>
+                </div>
 
-            <div class="col-md-7" id="main-area">
-
-                <!-- 메인 박스 -->
-                <div class="card-body" style="min-height: 700px;">
-                    {% block main_area %}
+                <div class="col-md-2" id="right-area" style="margin-top: -8px; margin-left: -15px">
+                    <!-- 우측 박스 -->
+                    <div>
+                        sfsd
+                        {{user_id}}
+                    </div>
+                    {% block right_area %}
                     {% endblock %}
                 </div>
 
             </div>
-
-            <div class="col-md-2" id="right-area" style="margin-top: -8px; margin-left: -15px">
-                <!-- 우측 박스 -->
-                {% block right_area %}
-                {% endblock %}
-            </div>
         </div>
     </div>
-</div>
+
     <!-- Footer -->
     {% include 'landing_page/footer.html' %}
 

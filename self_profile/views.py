@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from self_profile.forms import UserProfileForm
-from self_profile.models import UserProfile, Post
+from self_profile.models import UserProfile
 
 
 @login_required
@@ -26,7 +26,7 @@ def view_profile(request):
         'user_profile': user_profile,
         'form': form
     }
-    return render(request, 'self_profile/post_list.html', context)
+    return render(request, 'self_profile/profile.html', context)
 
 
 @login_required
@@ -46,7 +46,3 @@ def user_profile_update_form(request):
     }
     return render(request, 'self_profile/user_profile_update_form.html', context)
 
-
-class PostList(ListView):
-    model = Post
-    ordering = '-pk'
