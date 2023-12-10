@@ -117,7 +117,7 @@ def category_post(request, slug):
 
     return render(
         request,
-        'board/landing_list.html',
+        'board/post_list.html',
         {
             'post_list': post_list,
             'categories': Category.objects.all(),
